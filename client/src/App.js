@@ -1,25 +1,44 @@
-import logo from './logo.svg';
+import React from 'react';
 import './App.css';
 
-function App() {
+import { Route, Switch } from 'react-router-dom';
+import Nav from './Components/Nav';
+
+import Home from './routers/Home';
+import Jangbi from './Pages/Home/Jangbi';
+import Communtiy from './Pages/Home/Communtiy';
+import SignIn from './Pages/Auth/SignIn';
+import SignUp from './Pages/Auth/SignUp';
+import styled from 'styled-components';
+
+const Div = styled.div`
+  display: flex;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+  padding: auto;
+`;
+const App = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Div>
+      <Route path="/">
+        <Home />
+      </Route>
+      <Route path="/jangbi">
+        <Jangbi />
+      </Route>
+      <Route path="/communtiy">
+        <Communtiy />
+      </Route>
+
+      <Route path="/signin">
+        <SignIn />
+      </Route>
+      <Route path="/signup">
+        <SignUp />
+      </Route>
+    </Div>
   );
-}
+};
 
 export default App;
