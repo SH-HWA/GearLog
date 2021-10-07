@@ -1,9 +1,11 @@
 import React from 'react';
 import './App.css';
-import { Route, Switch } from 'react-router-dom';
+
+import { Route } from 'react-router-dom';
+
 import Home from './routers/Home';
-import Jangbi from './Pages/Home/Jangbi';
-import Communtiy from './Pages/Home/Communtiy';
+import Communtiy from './Pages/Communtiy';
+import Jangbi from './Pages/Jangbi';
 import SignIn from './Pages/Auth/SignIn';
 import SignUp from './Pages/Auth/SignUp';
 import styled from 'styled-components';
@@ -12,7 +14,7 @@ const Div = styled.div``;
 const App = () => {
   return (
     <Div>
-      <Route path="/">
+      <Route exact path="/">
         <Home />
       </Route>
       <Route path="/jangbi">
