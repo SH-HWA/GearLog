@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import Logo from './Logo';
-
+import { useHistory } from 'react-router-dom';
 const Navbar = styled.div`
   font-size: 30px;
   position: fixed; /*항상고정*/
@@ -12,8 +12,6 @@ const Navbar = styled.div`
   align-items: center;
   color: #2d3436;
   padding: 16px;
-
-  transition: 300ms ease-in-out;
 
   transition: 300ms ease-in-out;
 
@@ -46,13 +44,35 @@ const Navbar = styled.div`
 `;
 
 const Nav = () => {
+  const history = useHistory();
   return (
     <Navbar>
       <Logo />
       <ul class="navbar__menu">
-        <li class="navbar__munu__item active">Models</li>
-        <li class="navbar__munu__item">Board</li>
-        <li class="navbar__munu__item">SignIn</li>
+        <li
+          onClick={() => {
+            history.push('/models');
+          }}
+          class="navbar__munu__item active"
+        >
+          Models
+        </li>
+        <li
+          onClick={() => {
+            history.push('/communtiy');
+          }}
+          class="navbar__munu__item"
+        >
+          Board
+        </li>
+        <li
+          onClick={() => {
+            history.push('/signin');
+          }}
+          class="navbar__munu__item"
+        >
+          SignIn
+        </li>
       </ul>
     </Navbar>
   );
