@@ -12,11 +12,16 @@ const Navbar = styled.div`
   align-items: center;
   color: #2d3436;
   padding: 16px;
+
   transition: 300ms ease-in-out;
+
+  transition: 300ms ease-in-out;
+
   ul {
     list-style: none;
     padding-right: 600px;
   }
+
   .navbar__menu {
     display: flex;
     margin-top: 60px;

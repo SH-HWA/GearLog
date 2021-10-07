@@ -9,6 +9,7 @@ const Video = styled.div`
   align-items: center;
   padding-top: 15%;
   max-width: 100%;
+
   min-height: 100%;
   min-width: 1024px;
 `;
