@@ -8,13 +8,7 @@ import SignIn from './Pages/Auth/SignIn';
 import SignUp from './Pages/Auth/SignUp';
 import styled from 'styled-components';
 
-const Div = styled.div`
-  display: flex;
-  text-align: center;
-  justify-content: center;
-  align-items: center;
-  padding: auto;
-`;
+const Div = styled.div``;
 const App = () => {
   return (
     <Div>
