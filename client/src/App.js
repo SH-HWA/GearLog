@@ -1,9 +1,6 @@
 import React from 'react';
 import './App.css';
-
 import { Route, Switch } from 'react-router-dom';
-import Nav from './Components/Nav';
-
 import Home from './routers/Home';
 import Jangbi from './Pages/Home/Jangbi';
 import Communtiy from './Pages/Home/Communtiy';
