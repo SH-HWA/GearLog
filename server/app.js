@@ -6,7 +6,11 @@ const cookieParser = require('cookie-parser');
 
 const controllers = require("./controllers");
 
-app.use(cors());
+app.use(cors({
+  origin: ['http://localhost:3000'],
+  credentials: true,
+  methods: ['GET', 'POST', 'OPTIONS']
+}));
 app.use(cookieParser());
 app.use(express.json());
 
