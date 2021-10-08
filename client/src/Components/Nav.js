@@ -59,7 +59,7 @@ const Nav = () => {
         </li>
         <li
           onClick={() => {
-            history.push('/communtiy');
+            history.push('/view');
           }}
           class="navbar__munu__item"
         >
