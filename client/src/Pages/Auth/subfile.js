@@ -5,7 +5,6 @@ import styled from 'styled-components';
 import Button from '../../Components/common/Button';
 import { Link } from 'react-router-dom';
 import Logo from '../../Components/Logo';
-import axios from 'axios';
 
 const AuthFormBlock = styled.div`
   h3 {
@@ -64,22 +63,23 @@ const AuthForm = ({ type }) => {
   const [newPassword, setNewPassWord] = useState('');
   const [idCount, setIdCount] = useState(3);
 
+  const dummyDatabase = [
+    { id: 1, email: 'hi4190', password: '4190' },
+    {
+      id: 2,
+      email: 'gg1',
+      password: '1234',
+    },
+    {
+      id: 3,
+      email: '321ls',
+      password: '4321',
+    },
+  ];
+
+  let emailData = dummyDatabase.findIndex((el) => el.email === email);
+  let passwordData = dummyDatabase.findIndex((el) => el.password === password);
   //이메일만 골라낸후
-  const postLogin = () => {
-    axios
-      .post(
-        'https://localhost:8000/login',
-        { email: email, password: password },
-        {
-          headers: { 'Content-Type': 'application/json' },
-          withCredentials: true,
-        },
-      )
-      .then((res) => {
-        console.log(res);
-      })
-      .catch((err) => console.log('123123', err));
-  };
 
   const onChange = (event) => {
     const {
@@ -97,10 +97,32 @@ const AuthForm = ({ type }) => {
   const onSubmit = (e) => {
     e.preventDefault();
     if (type === 'login') {
-      postLogin();
+      if (emailData === -1 || passwordData === -1) {
+        alert('회원정보가 일치하지않거나 없으니까 다시입력해라^^');
+      } else {
+        if (emailData >= 0 || passwordData >= 0) {
+          history.push('/'); // 여기다 서버에 연락하는 코드를 짜면될거같다
+        }
+      }
     }
 
     if (type === 'register') {
+      if (emailData === 0) {
+        alert('아이디가 있습니다');
+      } else if (password !== newPassword) {
+        alert('비밀번호를 확인해주세요');
+      } else {
+        if (emailData === -1 && password === newPassword) {
+          dummyDatabase.push({
+            id: idCount + 1,
+            email: email,
+            password: password,
+          });
+          console.log(dummyDatabase);
+          alert('회원가입완료'); //데이터 베이스 에 세이브 하고 리다이렉트 가면될까?
+          history.push('/');
+        }
+      }
     }
   };
 
