@@ -1,4 +1,4 @@
-import React from 'react';
+import { useState } from 'react';
 import './App.css';
 import { Route } from 'react-router-dom';
 import Home from './routers/Home';
@@ -9,8 +9,12 @@ import styled from 'styled-components';
 import View from './Pages/Board/View';
 import RegisterPage from './Pages/Board/RegisterPage';
 
+//유저정보를 데이터베이스에 저장하고 인증할수있는 코드를짜야된다
+
 const Div = styled.div``;
 const App = () => {
+  const [userInfo, setUserinfo] = useState(null);
+
   return (
     <Div>
       <Route exact path="/">
@@ -25,12 +29,12 @@ const App = () => {
       <Route path="/signup">
         <SignUp />
       </Route>
-      <Route path= "/view">
+      <Route path="/view">
         <View />
-        </Route>
-        <Route path= "/registerpage">
+      </Route>
+      <Route path="/registerpage">
         <RegisterPage />
-        </Route>
+      </Route>
     </Div>
   );
 };
