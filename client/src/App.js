@@ -23,7 +23,7 @@ const App = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [newPassword, setNewPassWord] = useState('');
-  const [nickName, setNickName] = useState('');
+  const [username, setUsername] = useState('');
 
   const postLogin = () => {
     return axios
@@ -55,7 +55,7 @@ const App = () => {
         {
           email: email,
           password: password,
-          nickName: nickName,
+          username: username,
         },
         {
           headers: { 'Content-Type': 'application/json' },
@@ -86,7 +86,7 @@ const App = () => {
     } else if (name === 'newpassword') {
       setNewPassWord(value);
     } else if (name === 'nickname') {
-      setNickName(value);
+      setUsername(value);
     }
   };
 
@@ -113,7 +113,7 @@ const App = () => {
           onChange={onChange}
           postSignUp={postSignUp}
           newPassword={newPassword}
-          nickName={nickName}
+          username={username}
         />
       </Route>
       <Route path="/view">

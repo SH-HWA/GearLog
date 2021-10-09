@@ -4,7 +4,7 @@ import AuthForm from './AuthForm';
 import AuthTemplate from './AuthTemplate';
 
 const SignUp = ({
-  nickName,
+  username,
   email,
   password,
   newPassword,
@@ -19,7 +19,7 @@ const SignUp = ({
         onChange={onChange}
         postSignUp={postSignUp}
         newPassword={newPassword}
-        nickName={nickName}
+        username={username}
         type="register"
       />
     </AuthTemplate>
