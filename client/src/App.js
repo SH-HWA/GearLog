@@ -64,15 +64,15 @@ const App = () => {
       )
       .then((result) => {
         console.log(result);
-        // if (result.data.message === '이미 존재하는 username입니다') {
-        //   alert('이미있는 유저네입니다');
-        // } else if (result.data.message === '이미 존재하는 email입니다') {
-        //   alert('이미 존재하는 email입니다');
-        // }
-        // if (result.data.message === 'signup ok') {
-        //   alert('회원가입이완료되었습니다 로그인해주세요');
-        //   history.push('/signin');
-        // }
+        if (result.data.message === '이미 존재하는 email입니다') {
+          alert('이미 존재하는 email입니다');
+        } else if (result.data.message === '이미 존재하는 username입니다') {
+          alert('이미있는 유저네입니다');
+        }
+        if (result.data.message === 'signup ok') {
+          alert('회원가입이완료되었습니다 로그인해주세요');
+          history.push('/signin');
+        }
       })
       .catch((err) => {
         if (err) {
