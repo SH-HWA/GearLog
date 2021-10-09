@@ -17,7 +17,7 @@ module.exports = (req, res) => {
       if (data) {
         return res.status(409).send("이미 존재하는 username입니다");
       } else {
-        findOne({
+        userinfo.findOne({
           where: {
             email,
           },
