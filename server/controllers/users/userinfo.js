@@ -11,6 +11,7 @@ module.exports = (req, res) => {
     return res.status(200).json({ data: { userinfo: {
       email: accessTokenData.email,
       username: accessTokenData.username,
+      createdAt: accessTokenData.createdAt,
     }}})
   }
 };
