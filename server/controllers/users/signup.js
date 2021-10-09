@@ -2,12 +2,11 @@ const { userinfo } = require("../../models");
 const { generateAccessToken } = require("../tokenFunctions");
 
 module.exports = (req, res) => {
-  console.log("12312312", req.body);
-  const { email, password } = req.body;
+  const { username, email, password } = req.body;
 
-  if (!email || !password) {
-    res.status(422).send("모든 정보는 필수 입력 사항입니다.");
-  }
+  // if (!email  !password  !username) {
+  //   return res.status(422).send('모든 정보는 필수 입력 사항입니다.')
+  // }
 
   userinfo
     .findOne({
@@ -17,9 +16,7 @@ module.exports = (req, res) => {
     })
     .then((data) => {
       if (data) {
-        return res.status(409).json({
-          message: "이미 가입된 이메일 주소입니다.",
-        });
+        return res.status(409).json({ message: "이미 존재하는 email입니다" });
       } else {
         userinfo.create(req.body);
         const accessToken = generateAccessToken(req.body);
@@ -32,7 +29,7 @@ module.exports = (req, res) => {
             secure: true,
           })
           .status(201)
-          .send({ message: "signup ok" });
+          .json({ message: "signup ok" });
       }
     });
 };
