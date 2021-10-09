@@ -14,7 +14,7 @@ module.exports = (req, res) => {
     }
   }).then((data) => {
     if (data) {
-      return res.status(409).json({ message: "invalid user" })
+      return res.status(409).json({ message: "이미 존재하는 email입니다" })
     } else {
       userinfo.create(req.body)
       const accessToken = generateAccessToken(req.body);

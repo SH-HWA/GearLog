@@ -10,7 +10,7 @@ module.exports = async (req, res) => {
     }
   })
   if (!data) {
-    return res.status(404).json({ message: "invalid user" })
+    return res.status(404).json({ message: "비밀번호가 잘못되었거나 없는 이메일 입니다." })
   }
     
   const accessToken = generateAccessToken(data.dataValues);
