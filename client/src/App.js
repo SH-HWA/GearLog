@@ -63,6 +63,12 @@ const App = () => {
         },
       )
       .then((result) => {
+        console.log(result);
+        if (result.data.message === '이미 존재하는 email입니다') {
+          alert('이미 존재하는 email입니다');
+        } else if (result.data.message === '이미 존재하는 username입니다') {
+          alert('이미있는 유저네입니다');
+        }
         if (result.data.message === 'signup ok') {
           alert('회원가입이완료되었습니다 로그인해주세요');
           history.push('/signin');
@@ -70,7 +76,8 @@ const App = () => {
       })
       .catch((err) => {
         if (err) {
-          alert('이미 가입된 회원입니다 다른 이메일을 적어주세요');
+          console.log(err);
+          alert('모든 정보는 필수 입력 사항입니다.');
         }
       });
   };
