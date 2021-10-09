@@ -62,7 +62,7 @@ const AuthForm = ({
   password,
   onChange,
   newPassword,
-  nickName,
+  username,
 }) => {
   const text = textMap[type];
 
@@ -131,7 +131,7 @@ const AuthForm = ({
               name="nickname"
               placeholder="닉네임"
               type="text"
-              value={nickName}
+              value={username}
               required
               onChange={onChange}
             />
