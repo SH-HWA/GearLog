@@ -160,6 +160,7 @@ const AuthForm = ({ type }) => {
           required
           onChange={onChange}
         />
+
         {type === 'register' && (
           <StyledInput
             autoComplete="new-password"
@@ -171,6 +172,7 @@ const AuthForm = ({ type }) => {
             onChange={onChange}
           />
         )}
+
         <Button
           className="bottom-button"
           fullWidth

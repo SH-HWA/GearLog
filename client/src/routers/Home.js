@@ -24,10 +24,10 @@ const HomePage = styled.div`
   }
 `;
 
-const Home = () => {
+const Home = ({ isLogin }) => {
   return (
     <>
-      <Nav />
+      <Nav isLogin={isLogin} />
       <Video>
         <HomePage>
           <video autoPlay loop muted className="video">

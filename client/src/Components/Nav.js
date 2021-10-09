@@ -42,8 +42,8 @@ const Navbar = styled.div`
     border-color: white;
   }
 `;
-
-const Nav = () => {
+//isLogin이 true일때  마이페이지를 들어갈수있게해줌
+const Nav = ({ isLogin }) => {
   const history = useHistory();
   return (
     <Navbar>
@@ -72,6 +72,16 @@ const Nav = () => {
           class="navbar__munu__item"
         >
           SignIn
+        </li>
+        <li
+          onClick={() => {
+            if (isLogin) {
+              history.push('/MyPage');
+            }
+          }}
+          class="navbar__munu__item"
+        >
+          MyPage
         </li>
       </ul>
     </Navbar>
