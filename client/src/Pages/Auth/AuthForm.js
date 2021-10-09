@@ -62,13 +62,15 @@ const AuthForm = ({ type }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [newPassword, setNewPassWord] = useState('');
-  const [idCount, setIdCount] = useState(3);
-
-  //이메일만 골라낸후
+  /*
+  로그인이 됬을때 홈화면으로가고 로그인페이지는 로그아웃만 남겨놓는다
+  홈화면에서는 로그인 버튼이 로그아웃버튼으로 바뀌어야한다.
+  로그아웃 버튼을 누를시 로그인버튼으로 바뀌어야되고 다시 로그인 페이지로 갈수있게 하기
+*/
   const postLogin = () => {
-    axios
+    return axios
       .post(
-        'https://localhost:8000/login',
+        'http://localhost:8000/login',
         { email: email, password: password },
         {
           headers: { 'Content-Type': 'application/json' },
@@ -76,9 +78,32 @@ const AuthForm = ({ type }) => {
         },
       )
       .then((res) => {
-        console.log(res);
+        console.log('@@@@@', res);
       })
-      .catch((err) => console.log('123123', err));
+      .catch((err) => console.log(err));
+  };
+
+  const postSignUp = () => {
+    return axios
+      .post(
+        'http://localhost:8000/signup',
+        {
+          email: email,
+          password: password,
+        },
+        {
+          headers: { 'Content-Type': 'application/json' },
+          withCredentials: true,
+        },
+      )
+      .then((result) => {
+        // if (result.data.message === 'signup ok') {
+        //   alert('회원가입이완료되었습니다 로그인해주세요');
+        //   history.push('/');
+        // }
+        console.log('reuslt', result);
+      })
+      .catch((err) => console.log(err));
   };
 
   const onChange = (event) => {
@@ -101,6 +126,7 @@ const AuthForm = ({ type }) => {
     }
 
     if (type === 'register') {
+      postSignUp();
     }
   };
 
