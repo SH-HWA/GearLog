@@ -1,11 +1,9 @@
 //회원가입과 로그인폼 컴포넌트
-import { useState } from 'react';
-import { useHistory } from 'react-router-dom';
+
 import styled from 'styled-components';
 import Button from '../../Components/common/Button';
 import { Link } from 'react-router-dom';
 import Logo from '../../Components/Logo';
-import axios from 'axios';
 
 const AuthFormBlock = styled.div`
   h3 {
@@ -56,69 +54,18 @@ const textMap = {
   logo: '간편로그인',
 };
 
-const AuthForm = ({ type }) => {
+const AuthForm = ({
+  type,
+  postSignUp,
+  postLogin,
+  email,
+  password,
+  onChange,
+  newPassword,
+  nickName,
+}) => {
   const text = textMap[type];
-  const history = useHistory();
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [newPassword, setNewPassWord] = useState('');
-  /*
-  로그인이 됬을때 홈화면으로가고 로그인페이지는 로그아웃만 남겨놓는다
-  홈화면에서는 로그인 버튼이 로그아웃버튼으로 바뀌어야한다.
-  로그아웃 버튼을 누를시 로그인버튼으로 바뀌어야되고 다시 로그인 페이지로 갈수있게 하기
-*/
-  const postLogin = () => {
-    return axios
-      .post(
-        'http://localhost:8000/login',
-        { email: email, password: password },
-        {
-          headers: { 'Content-Type': 'application/json' },
-          withCredentials: true,
-        },
-      )
-      .then((res) => {
-        console.log('@@@@@', res);
-      })
-      .catch((err) => console.log(err));
-  };
 
-  const postSignUp = () => {
-    return axios
-      .post(
-        'http://localhost:8000/signup',
-        {
-          email: email,
-          password: password,
-        },
-        {
-          headers: { 'Content-Type': 'application/json' },
-          withCredentials: true,
-        },
-      )
-      .then((result) => {
-        // if (result.data.message === 'signup ok') {
-        //   alert('회원가입이완료되었습니다 로그인해주세요');
-        //   history.push('/');
-        // }
-        console.log('reuslt', result);
-      })
-      .catch((err) => console.log(err));
-  };
-
-  const onChange = (event) => {
-    const {
-      target: { name, value },
-    } = event;
-    if (name === 'email') {
-      setEmail(value);
-    } else if (name === 'password') {
-      setPassword(value);
-    } else if (name === 'newpassword') {
-      setNewPassWord(value);
-    }
-  };
-  //회원가입을 눌렀을때는 어떻게 하지?
   const onSubmit = (e) => {
     e.preventDefault();
     if (type === 'login') {
@@ -126,6 +73,9 @@ const AuthForm = ({ type }) => {
     }
 
     if (type === 'register') {
+      if (password !== newPassword) {
+        alert('패스워드 그거 맞아?');
+      }
       postSignUp();
     }
   };
@@ -155,6 +105,7 @@ const AuthForm = ({ type }) => {
           required
           onChange={onChange}
         />
+
         <StyledInput
           autoComplete="new-password"
           name="password"
@@ -165,15 +116,26 @@ const AuthForm = ({ type }) => {
           onChange={onChange}
         />
         {type === 'register' && (
-          <StyledInput
-            autoComplete="new-password"
-            name="newpassword"
-            placeholder="비밀번호확인"
-            type="password"
-            value={newPassword}
-            required
-            onChange={onChange}
-          />
+          <>
+            <StyledInput
+              autoComplete="new-password"
+              name="newpassword"
+              placeholder="비밀번호확인"
+              type="password"
+              value={newPassword}
+              required
+              onChange={onChange}
+            />
+            <StyledInput
+              autoComplete="new-password"
+              name="nickname"
+              placeholder="닉네임"
+              type="text"
+              value={nickName}
+              required
+              onChange={onChange}
+            />
+          </>
         )}
         <Button
           className="bottom-button"
