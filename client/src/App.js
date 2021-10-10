@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import './App.css';
 import { Route } from 'react-router-dom';
 import Home from './routers/Home';
@@ -26,6 +26,10 @@ const App = () => {
   const [newPassword, setNewPassWord] = useState('');
   const [username, setUsername] = useState('');
 
+  useEffect(() => {
+    authorization();
+  }, []);
+
   const postLogin = () => {
     return axios
       .post(
@@ -39,18 +43,40 @@ const App = () => {
       .then((res) => {
         if (res.data.message === 'ok') {
           //유저정보가 변한것이 마이페이지에 보여야된다
-          console.log(res.data);
+          let token = res.data.token;
+          localStorage.setItem('token', token);
           setIsLogin(true);
           setUsername(username);
           setPassword(password);
           setEmail(email);
           history.push('/');
+          // authorization();
         }
       })
       .catch((err) => {
         if (err) {
           alert('이메일과 패스워드를 확인해주세요');
         }
+      });
+  };
+
+  const authorization = () => {
+    let token = localStorage.getItem('token');
+
+    axios
+      .get('http://localhost:8000/userinfo', {
+        headers: { authorization: `Bearer ${token}` },
+      })
+      .then((res) => {
+        let totoken = res.config.headers.authorization.split(' ')[1];
+        if (token === totoken) {
+          setIsLogin(true);
+          setUsername(res.data.data.userinfo.username);
+          setEmail(res.data.data.userinfo.email);
+        }
+      })
+      .catch((err) => {
+        console.log(err);
       });
   };
 
