@@ -43,7 +43,7 @@ module.exports = (req, res) => {
                   secure: true,
                 })
                 .status(201)
-                .json({ message: "signup ok" });
+                .json({ message: "signup ok", token: `${accessToken}` });
             }
           });
       }
