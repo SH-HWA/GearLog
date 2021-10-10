@@ -82,6 +82,27 @@ const App = () => {
       });
   };
 
+  const postLogout = () => {
+    return axios
+      .post('http://localhost:8000/logout')
+      .then((res) => {
+        if (res.data.message === '현재 로그인 중이 아닙니다.') {
+          setIsLogin(false);
+          alert('로그아웃되었습니다');
+          history.push('/');
+        }
+      })
+      .catch((err) => {
+        if (err) {
+          console.log(err);
+          alert('로그아웃이 되지않았습니다');
+        }
+      });
+  };
+  /*로그아웃을 signIn쪽에 넣고
+   로그아웃을 누르면 isLogin 이 false로 바뀐다
+  */
+
   const onChange = (event) => {
     const {
       target: { name, value },
@@ -100,7 +121,7 @@ const App = () => {
   return (
     <Div>
       <Route exact path="/">
-        <Home isLogin={isLogin} />
+        <Home isLogin={isLogin} postLogout={postLogout} />
       </Route>
       <Route path="/jangbi">
         <Jangbi />
