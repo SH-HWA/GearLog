@@ -43,7 +43,7 @@ const Navbar = styled.div`
   }
 `;
 //isLogin이 true일때  마이페이지를 들어갈수있게해줌
-const Nav = ({ isLogin }) => {
+const Nav = ({ isLogin, postLogout }) => {
   const history = useHistory();
   return (
     <Navbar>
@@ -65,18 +65,33 @@ const Nav = ({ isLogin }) => {
         >
           Board
         </li>
-        <li
-          onClick={() => {
-            history.push('/signin');
-          }}
-          class="navbar__munu__item"
-        >
-          SignIn
-        </li>
+
+        {!isLogin ? (
+          <li
+            onClick={() => {
+              history.push('/signin');
+            }}
+            class="navbar__munu__item"
+          >
+            SignIn
+          </li>
+        ) : (
+          <li
+            onClick={() => {
+              postLogout();
+            }}
+            class="navbar__munu__item"
+          >
+            SignOut
+          </li>
+        )}
+
         <li
           onClick={() => {
             if (isLogin) {
               history.push('/MyPage');
+            } else {
+              alert('login을 해주세요');
             }
           }}
           class="navbar__munu__item"
@@ -89,3 +104,7 @@ const Nav = ({ isLogin }) => {
 };
 
 export default Nav;
+
+/*
+  로그아웃
+*/

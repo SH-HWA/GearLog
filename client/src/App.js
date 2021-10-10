@@ -63,6 +63,12 @@ const App = () => {
         },
       )
       .then((result) => {
+        console.log(result);
+        if (result.data.message === '이미 존재하는 email입니다') {
+          alert('이미 존재하는 email입니다');
+        } else if (result.data.message === '이미 존재하는 username입니다') {
+          alert('이미있는 유저네입니다');
+        }
         if (result.data.message === 'signup ok') {
           alert('회원가입이완료되었습니다 로그인해주세요');
           history.push('/signin');
@@ -70,10 +76,32 @@ const App = () => {
       })
       .catch((err) => {
         if (err) {
-          alert('이미 가입된 회원입니다 다른 이메일을 적어주세요');
+          console.log(err);
+          alert('모든 정보는 필수 입력 사항입니다.');
         }
       });
   };
+
+  const postLogout = () => {
+    return axios
+      .post('http://localhost:8000/logout')
+      .then((res) => {
+        if (res.data.message === '현재 로그인 중이 아닙니다.') {
+          setIsLogin(false);
+          alert('로그아웃되었습니다');
+          history.push('/');
+        }
+      })
+      .catch((err) => {
+        if (err) {
+          console.log(err);
+          alert('로그아웃이 되지않았습니다');
+        }
+      });
+  };
+  /*로그아웃을 signIn쪽에 넣고
+   로그아웃을 누르면 isLogin 이 false로 바뀐다
+  */
 
   const onChange = (event) => {
     const {
@@ -93,7 +121,7 @@ const App = () => {
   return (
     <Div>
       <Route exact path="/">
-        <Home isLogin={isLogin} />
+        <Home isLogin={isLogin} postLogout={postLogout} />
       </Route>
       <Route path="/jangbi">
         <Jangbi />
