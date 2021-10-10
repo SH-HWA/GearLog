@@ -2,7 +2,7 @@ const { userinfo } = require("../../models");
 const { generateAccessToken, sendAccessToken } = require("../tokenFunctions");
 
 module.exports = async (req, res) => {
-  console.log(req.body);
+  // console.log(req.body);
   const { email, password } = req.body;
   let data = await userinfo.findOne({
     where: {
