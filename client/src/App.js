@@ -7,6 +7,7 @@ import SignIn from './Pages/Auth/SignIn';
 import SignUp from './Pages/Auth/SignUp';
 import styled from 'styled-components';
 import View from './Pages/Board/View';
+import MyPage from './Pages/MyPage';
 import RegisterPage from './Pages/Board/RegisterPage';
 import { useHistory } from 'react-router-dom';
 import axios from 'axios';
@@ -19,7 +20,7 @@ const Div = styled.div``;
 const App = () => {
   const history = useHistory();
   const [isLogin, setIsLogin] = useState(false);
-  const [userInfo, setUserinfo] = useState(null);
+
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [newPassword, setNewPassWord] = useState('');
@@ -37,7 +38,12 @@ const App = () => {
       )
       .then((res) => {
         if (res.data.message === 'ok') {
+          //유저정보가 변한것이 마이페이지에 보여야된다
+          console.log(res.data);
           setIsLogin(true);
+          setUsername(username);
+          setPassword(password);
+          setEmail(email);
           history.push('/');
         }
       })
@@ -150,8 +156,14 @@ const App = () => {
       <Route path="/registerpage">
         <RegisterPage />
       </Route>
+      <Route path="/mypage">
+        <MyPage email={email} password={password} username={username} />
+      </Route>
     </Div>
   );
 };
 
 export default App;
+/*
+
+*/

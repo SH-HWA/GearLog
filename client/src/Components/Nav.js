@@ -89,7 +89,7 @@ const Nav = ({ isLogin, postLogout }) => {
         <li
           onClick={() => {
             if (isLogin) {
-              history.push('/MyPage');
+              history.push('/mypage');
             } else {
               alert('login을 해주세요');
             }
