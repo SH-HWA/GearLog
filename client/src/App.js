@@ -117,7 +117,13 @@ const App = () => {
 
   const postLogout = () => {
     return axios
-      .post('http://localhost:8000/logout')
+      .post(
+        'http://localhost:8000/logout',
+        {},
+        {
+          withCredentials: true,
+        },
+      )
       .then((res) => {
         if (res.data.message === '현재 로그인 중이 아닙니다.') {
           setIsLogin(false);
@@ -185,7 +191,13 @@ const App = () => {
         <RegisterPage />
       </Route>
       <Route path="/mypage">
-        <MyPage email={email} password={password} username={username} />
+        <MyPage
+          onChage={onChange}
+          email={email}
+          password={password}
+          username={username}
+          setUsername={setUsername}
+        />
       </Route>
     </Div>
   );
