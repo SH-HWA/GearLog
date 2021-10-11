@@ -19,6 +19,7 @@ app.use(express.json());
 app.get("/userinfo", controllers.userinfo);
 app.post("/login", controllers.login);
 app.post("/signup", controllers.signup);
+app.delete("/signout", controllers.signout);
 app.post("/logout", controllers.logout);
 app.post("/kakao/callback", controllers.kakaoCB);
 app.post("/userinfo/update", controllers.update);

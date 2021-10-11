@@ -1,13 +1,20 @@
 const { userinfo } = require("../../models");
 const { generateAccessToken, sendAccessToken } = require("../tokenFunctions");
+const crypto = require("crypto");
 
 module.exports = async (req, res) => {
   // console.log(req.body);
   const { email, password } = req.body;
+
+  const hashPassword = crypto
+    .createHash("sha512")
+    .update(password)
+    .digest("hex");
+
   let data = await userinfo.findOne({
     where: {
       email: email,
-      password: password,
+      password: hashPassword,
     },
   });
   if (!data) {
