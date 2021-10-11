@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import Button from '../../Components/common/Button';
 import { Link } from 'react-router-dom';
 import Logo from '../../Components/Logo';
+import { emailCheck, passwordCheck } from '../../Modules/Verifi';
 
 const AuthFormBlock = styled.div`
   h3 {
@@ -73,8 +74,18 @@ const AuthForm = ({
     }
 
     if (type === 'register') {
+      if (!emailCheck(email)) {
+        alert('적합한 이메일이 아닙니다');
+        return false;
+      }
+
       if (password !== newPassword) {
         alert('패스워드 그거 맞아?');
+        return false;
+      }
+      if (!passwordCheck(password)) {
+        alert('특수문자,영문, 숫자 필수 포함 6~21자리');
+        return false;
       }
       postSignUp();
     }
