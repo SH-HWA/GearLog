@@ -17,6 +17,7 @@ module.exports = async (req, res) => {
       password: hashPassword,
     },
   });
+  // console.log(data.dataValues);
   if (!data) {
     return res
       .status(404)

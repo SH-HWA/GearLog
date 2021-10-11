@@ -16,6 +16,7 @@ module.exports = (req, res) => {
       },
     })
     .then(() => {
+      res.clearCookie("accessToken");
       res.status(200).json({ message: "signout ok" });
     });
 };
