@@ -42,17 +42,18 @@ module.exports = (req, res) => {
                 email: email,
                 password: hashPassword,
               });
-              const accessToken = generateAccessToken(req.body);
+              // const accessToken = generateAccessToken(req.body);
 
               res
-                .cookie("accessToken", accessToken, {
-                  httpOnly: true,
-                  expiresIn: "180m",
-                  sameSite: "Strict",
-                  secure: true,
-                })
+                // .cookie("accessToken", accessToken, {
+                //   httpOnly: true,
+                //   expiresIn: "180m",
+                //   sameSite: "Strict",
+                //   secure: true,
+                // })
                 .status(201)
-                .json({ message: "signup ok", token: `${accessToken}` });
+                // .json({ message: "signup ok", token: `${accessToken}` });
+                .json({ message: "signup ok" });
             }
           });
       }

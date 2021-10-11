@@ -1,6 +1,6 @@
 const { userinfo } = require("../../models");
 
-module.exports = async (req, res) => {
+module.exports = (req, res) => {
   const { username } = req.body;
 
   if (!username) {
