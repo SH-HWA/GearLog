@@ -33,7 +33,7 @@ module.exports = (req, res) => {
                 },
               })
               .then((data) => {
-                console.log(data);
+                // console.log(data);
                 const newToken = generateAccessToken(data.dataValues);
                 res.clearCookie("accessToken");
                 res
@@ -45,8 +45,10 @@ module.exports = (req, res) => {
                   .status(200)
                   .json({
                     message: `username이 ${newname}(으)로 변경되었습니다.`,
+                    token: `${newToken}`,
                   });
-              });
+              })
+              .catch((err) => console.log(err));
           });
       }
     });
