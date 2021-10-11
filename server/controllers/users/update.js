@@ -1,4 +1,5 @@
 const { userinfo } = require("../../models");
+const { generateAccessToken } = require("../tokenFunctions");
 
 module.exports = (req, res) => {
   const { newname } = req.body;
@@ -25,9 +26,27 @@ module.exports = (req, res) => {
             }
           )
           .then(() => {
-            res.status(200).json({
-              message: `username이 ${newname}(으)로 변경되었습니다.`,
-            });
+            userinfo
+              .findOne({
+                where: {
+                  username: req.body.newname,
+                },
+              })
+              .then((data) => {
+                console.log(data);
+                const newToken = generateAccessToken(data.dataValues);
+                res.clearCookie("accessToken");
+                res
+                  .cookie("accessToken", newToken, {
+                    httpOnly: true,
+                    expiresIn: "180m",
+                    sameSite: "Strict",
+                  })
+                  .status(200)
+                  .json({
+                    message: `username이 ${newname}(으)로 변경되었습니다.`,
+                  });
+              });
           });
       }
     });

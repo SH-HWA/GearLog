@@ -11,7 +11,6 @@ module.exports = {
         httpOnly: true,
         expiresIn: "180m",
         sameSite: "Strict",
-        secure: true,
       })
       .status(200)
       .json({ message: "ok", token: `${accessToken}` });
