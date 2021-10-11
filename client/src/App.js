@@ -15,7 +15,8 @@ import axios from 'axios';
 //유저정보를 데이터베이스에 저장하고 인증할수있는 코드를짜야된다
 //로그인상태가 트루가된다면 메인페이지에서 마이페이지를 보여줘야한다
 //마이페이지에서는 무엇을 해야할까?
-
+// 회원가입, 로그인, 로그아웃, 마이페이지, 회원탈퇴 기능 구현 필수 프론트엔드, 백엔드 ★
+//회원가입, 로그인 및 회원정보 수정 시 유효성 검사 필수 프론트엔드 ★
 const Div = styled.div``;
 const App = () => {
   const history = useHistory();
@@ -121,6 +122,7 @@ const App = () => {
         if (res.data.message === '현재 로그인 중이 아닙니다.') {
           setIsLogin(false);
           alert('로그아웃되었습니다');
+          localStorage.clear();
           history.push('/');
         }
       })
