@@ -47,7 +47,7 @@ import axios from 'axios';
 
 const Div = styled.div``;
 
-const MyPage = ({ username, email, setUsername }) => {
+const MyPage = ({ username, email, setUsername, isLogin, setIsLogin }) => {
   const [changeName, setChangeName] = useState('');
   const history = useHistory();
 
@@ -71,19 +71,57 @@ const MyPage = ({ username, email, setUsername }) => {
   };
 
   const ondeleteUser = () => {
-    axios
-      .delete('http://localhost:8000/signout', {
-        data: {
-          username: username,
-        },
-      })
-      .then((res) => {
-        console.log(res);
-      });
+    let confirm = window.confirm('회원탈퇴하실거에요?');
+
+    if (confirm) {
+      axios
+        .delete('http://localhost:8000/signout', {
+          data: {
+            username: username,
+          },
+        })
+        .then((res) => {
+          if (res.status === 200) {
+            localStorage.clear();
+            setIsLogin(false);
+            alert('탈퇴가 완료되었습니다');
+            history.push('/');
+          } else {
+            alert('처리에 문제가있습니다 고객센터로 연락주세요');
+          }
+        });
+    } else {
+      if (!confirm) alert('감사합니다');
+    }
   };
 
   const onUsernameChange = (event) => {
     setChangeName(event.target.value);
+  };
+
+  const postLogout = () => {
+    return axios
+      .post(
+        'http://localhost:8000/logout',
+        {},
+        {
+          withCredentials: true,
+        },
+      )
+      .then((res) => {
+        if (res.data.message === '현재 로그인 중이 아닙니다.') {
+          setIsLogin(false);
+          alert('로그아웃되었습니다');
+          localStorage.clear();
+          history.push('/');
+        }
+      })
+      .catch((err) => {
+        if (err) {
+          console.log(err);
+          alert('로그아웃이 되지않았습니다');
+        }
+      });
   };
 
   return (
@@ -111,7 +149,7 @@ const MyPage = ({ username, email, setUsername }) => {
         </div>
       </Div>
       <button>Go Main Page</button>
-      <button>logOut</button>
+      <button onClick={postLogout}>logOut</button>
       <button onClick={ondeleteUser}>회원탈퇴</button>
     </MyPageTemplate>
   );
