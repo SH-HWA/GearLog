@@ -197,6 +197,7 @@ const App = () => {
           password={password}
           username={username}
           setUsername={setUsername}
+          setIsLogin={setIsLogin}
         />
       </Route>
     </Div>
