@@ -1,45 +1,44 @@
 import React from 'react';
 import styled from 'styled-components';
-import Logo from './Logo';
+
 import { useHistory } from 'react-router-dom';
+
+const Div = styled.div`
+  position: fixed;
+  width: 100%;
+`;
+
 const Navbar = styled.div`
-  font-size: 30px;
-  position: fixed; /*항상고정*/
+  font-size: 20px;
+  font-weight: 500;
+  margin-top: 50px;
+
+  position: fixed;
   width: 100%;
   display: flex;
-  justify-content: space-between;
-  z-index: 1;
+  justify-content: end;
   align-items: center;
-  color: #2d3436;
-  padding: 16px;
-
-  transition: 300ms ease-in-out;
+  justify-content: center;
+  color: rgb(245, 246, 250);
+  background-color: rgb(25, 42, 86);
+  min-width: 1024px;
 
   ul {
     list-style: none;
-    padding-right: 600px;
   }
 
   .navbar__menu {
     display: flex;
-    margin-top: 60px;
-    .navbar__menu {
-      flex-direction: column;
-      text-align: center;
-      width: 100%;
-      display: none;
-    }
   }
   .navbar__munu__item {
-    padding: 8px 20px;
-    margin: 0 4px;
     cursor: pointer;
-    border-radius: 4px;
-    border: 1px solid transparent;
+    margin: 10px;
+    padding-left: 10px;
+
+    transition: 100ms ease-in-out;
   }
-  .navbar__munu__item:hover {
-    background-color: #dfe6e9;
-    border-color: white;
+  & .navbar__munu__item:hover {
+    color: rgb(248, 239, 186);
   }
 `;
 //isLogin이 true일때  마이페이지를 들어갈수있게해줌
@@ -47,46 +46,45 @@ const Nav = ({ isLogin, postLogout }) => {
   const history = useHistory();
   return (
     <Navbar>
-      <Logo />
-      <ul class="navbar__menu">
-        <li
+      <div class="navbar__menu">
+        <div
           onClick={() => {
             history.push('/models');
           }}
           class="navbar__munu__item active"
         >
           Models
-        </li>
-        <li
+        </div>
+        <div
           onClick={() => {
             history.push('/view');
           }}
           class="navbar__munu__item"
         >
           Board
-        </li>
+        </div>
 
         {!isLogin ? (
-          <li
+          <div
             onClick={() => {
               history.push('/signin');
             }}
             class="navbar__munu__item"
           >
             SignIn
-          </li>
+          </div>
         ) : (
-          <li
+          <div
             onClick={() => {
               postLogout();
             }}
             class="navbar__munu__item"
           >
             SignOut
-          </li>
+          </div>
         )}
 
-        <li
+        <div
           onClick={() => {
             if (isLogin) {
               history.push('/mypage');
@@ -97,8 +95,8 @@ const Nav = ({ isLogin, postLogout }) => {
           class="navbar__munu__item"
         >
           MyPage
-        </li>
-      </ul>
+        </div>
+      </div>
     </Navbar>
   );
 };

@@ -5,45 +5,6 @@ import Logo from '../Components/Logo';
 
 import { useHistory, Link } from 'react-router-dom';
 import axios from 'axios';
-// const Table = styled.div`
-//   .type {
-//     border-collapse: collapse;
-//     text-align: left;
-//     line-height: 1.5;
-//     border-top: 1px solid #ccc;
-//     border-left: 3px solid #369;
-//     margin: 20px 10px;
-//     &.type th {
-//       width: 147px;
-//       padding: 10px;
-//       font-weight: bold;
-//       vertical-align: top;
-//       color: #153d73;
-//       border-right: 1px solid #ccc;
-//       border-bottom: 1px solid #ccc;
-//     }
-//     &.type td {
-//       display: flex;
-//       width: 220px;
-//       padding: 10px;
-//       vertical-align: top;
-//       border-right: 1px solid #ccc;
-//       border-bottom: 1px solid #ccc;
-//       padding-right: -100px;
-//       .Button {
-//         background-color: #153d73;
-//         float: right;
-//       }
-//       & :hover {
-//         background-color: #0984e3;
-//         transition: 300ms;
-//       }
-//     }
-//     .buttons {
-//       text-align: center;
-//     }
-//   }
-// `;
 
 const Div = styled.div``;
 

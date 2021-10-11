@@ -5,19 +5,30 @@ import Home from './routers/Home';
 import Jangbi from './Pages/Jangbi';
 import SignIn from './Pages/Auth/SignIn';
 import SignUp from './Pages/Auth/SignUp';
-import styled from 'styled-components';
-import View from './Pages/Board/View';
+import Nav from './Components/Nav';
+import Logo from './Components/Logo';
 import MyPage from './Pages/MyPage';
-import RegisterPage from './Pages/Board/RegisterPage';
-import { useHistory } from 'react-router-dom';
+
+import { useHistory, Link } from 'react-router-dom';
 import axios from 'axios';
+
+import Models from './routers/Model/Models';
+import Logitech from './routers/Model/Gear/Logitech';
+import styled from 'styled-components';
 
 //유저정보를 데이터베이스에 저장하고 인증할수있는 코드를짜야된다
 //로그인상태가 트루가된다면 메인페이지에서 마이페이지를 보여줘야한다
 //마이페이지에서는 무엇을 해야할까?
 // 회원가입, 로그인, 로그아웃, 마이페이지, 회원탈퇴 기능 구현 필수 프론트엔드, 백엔드 ★
 //회원가입, 로그인 및 회원정보 수정 시 유효성 검사 필수 프론트엔드 ★
-const Div = styled.div``;
+const Div = styled.div`
+  font-size: 30px;
+
+  width: 100%;
+  :hover {
+    cursor: pointer;
+  }
+`;
 const App = () => {
   const history = useHistory();
   const [isLogin, setIsLogin] = useState(false);
@@ -159,7 +170,17 @@ const App = () => {
   };
 
   return (
-    <Div>
+    <div>
+      <Div
+        style={{ position: 'fixed' }}
+        onClick={() => {
+          history.push('/');
+        }}
+      >
+        GearLog
+      </Div>
+
+      <Nav isLogin={isLogin} postLogout={postLogout} />
       <Route exact path="/">
         <Home isLogin={isLogin} postLogout={postLogout} />
       </Route>
@@ -184,12 +205,6 @@ const App = () => {
           username={username}
         />
       </Route>
-      <Route path="/view">
-        <View />
-      </Route>
-      <Route path="/registerpage">
-        <RegisterPage />
-      </Route>
       <Route path="/mypage">
         <MyPage
           onChage={onChange}
@@ -201,7 +216,13 @@ const App = () => {
           authorization={authorization}
         />
       </Route>
-    </Div>
+      <Route path="/models">
+        <Models />
+      </Route>
+      <Route path="/models/logi">
+        <Logitech />
+      </Route>
+    </div>
   );
 };
 
