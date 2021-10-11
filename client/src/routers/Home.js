@@ -2,12 +2,13 @@ import React from 'react';
 import styled from 'styled-components';
 import Nav from '../Components/Nav';
 import video from '../img/video/Orange and Lemon Branding Guidelines Presentation.mp4';
+import Logo from '../Components/Logo';
 
 const Video = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  padding-top: 15%;
+  padding-top: 5%;
   max-width: 100%;
 
   min-height: 100%;
@@ -15,11 +16,9 @@ const Video = styled.div`
 `;
 
 const HomePage = styled.div`
-  margin: 0px;
   .video {
     margin-top: 50px;
-    max-width: 200%;
-    height: 800px;
+
     width: 1000px;
   }
 `;
@@ -28,6 +27,7 @@ const Home = ({ isLogin, postLogout }) => {
   return (
     <>
       <Nav isLogin={isLogin} postLogout={postLogout} />
+
       <Video>
         <HomePage>
           <video autoPlay loop muted className="video">
