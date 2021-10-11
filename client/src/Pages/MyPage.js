@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import MyPageTemplate from './Auth/AuthTemplate';
 import Logo from '../Components/Logo';
 
-import { useHistory } from 'react-router-dom';
+import { useHistory, Link } from 'react-router-dom';
 import axios from 'axios';
 // const Table = styled.div`
 //   .type {
@@ -43,11 +43,18 @@ import axios from 'axios';
 //       text-align: center;
 //     }
 //   }
-// `;!
+// `;
 
 const Div = styled.div``;
 
-const MyPage = ({ username, email, setUsername, isLogin, setIsLogin }) => {
+const MyPage = ({
+  username,
+  email,
+  setUsername,
+  isLogin,
+  setIsLogin,
+  authorization,
+}) => {
   const [changeName, setChangeName] = useState('');
   const history = useHistory();
 
@@ -65,7 +72,10 @@ const MyPage = ({ username, email, setUsername, isLogin, setIsLogin }) => {
       )
       .then((res) => {
         if (res.status === 200) {
-          setUsername(changeName);
+          let token = res.data.token;
+          localStorage.setItem('token', token);
+          authorization();
+          // setUsername(changeName);
         }
       });
   };
@@ -148,7 +158,9 @@ const MyPage = ({ username, email, setUsername, isLogin, setIsLogin }) => {
           </div>
         </div>
       </Div>
-      <button>Go Main Page</button>
+      <Link to="/">
+        <button>Go home</button>
+      </Link>
       <button onClick={postLogout}>logOut</button>
       <button onClick={ondeleteUser}>회원탈퇴</button>
     </MyPageTemplate>

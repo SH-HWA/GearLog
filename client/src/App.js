@@ -198,6 +198,7 @@ const App = () => {
           username={username}
           setUsername={setUsername}
           setIsLogin={setIsLogin}
+          authorization={authorization}
         />
       </Route>
     </Div>
