@@ -5,4 +5,5 @@ module.exports = {
   logout: require("./users/logout"),
   kakaoCB: require("./callbacks/kakao"),
   update: require("./users/update"),
+  signout: require("./users/signout"),
 };
