@@ -20,12 +20,12 @@ const Logistyle = styled.div`
     height: 300px;
   }
 `;
-const Logitech = () => {
+const Logitech = ({ drop, setDrop }) => {
   const [onVideo, setOnVideo] = useState(false);
   const onClickButton = () => {};
 
   return (
-    <Logistyle>
+    <Logistyle onClick={() => setDrop(true)}>
       <ul className="jangbi_list">
         <div className="Logi_img">
           <img src={GproX} />

@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
-
-import { useHistory } from 'react-router-dom';
+import './Nav.css';
+import { BrowserRouter, useHistory, Route } from 'react-router-dom';
+import Models from '../routers/Models';
 
 const Div = styled.div`
   position: fixed;
@@ -42,62 +43,63 @@ const Navbar = styled.div`
   }
 `;
 //isLogin이 true일때  마이페이지를 들어갈수있게해줌
-const Nav = ({ isLogin, postLogout }) => {
+const Nav = ({ isLogin, postLogout, drop, setDrop }) => {
   const history = useHistory();
   return (
-    <Navbar>
-      <div class="navbar__menu">
-        <div
-          onClick={() => {
-            history.push('/models');
-          }}
-          class="navbar__munu__item active"
-        >
-          Models
-        </div>
-        <div
-          onClick={() => {
-            history.push('/view');
-          }}
-          class="navbar__munu__item"
-        >
-          Board
-        </div>
+    <div>
+      <Navbar>
+        <div className="navbar__menu">
+          <div
+            onClick={() => setDrop(!drop)}
+            className="navbar__munu__item active"
+          >
+            Models
+          </div>
 
-        {!isLogin ? (
           <div
             onClick={() => {
-              history.push('/signin');
+              history.push('/view');
             }}
-            class="navbar__munu__item"
+            className="navbar__munu__item"
           >
-            SignIn
+            Board
           </div>
-        ) : (
+
+          {!isLogin ? (
+            <div
+              onClick={() => {
+                history.push('/signin');
+              }}
+              className="navbar__munu__item"
+            >
+              SignIn
+            </div>
+          ) : (
+            <div
+              onClick={() => {
+                postLogout();
+              }}
+              class="navbar__munu__item"
+            >
+              SignOut
+            </div>
+          )}
+
           <div
             onClick={() => {
-              postLogout();
+              if (isLogin) {
+                history.push('/mypage');
+              } else {
+                alert('login을 해주세요');
+              }
             }}
-            class="navbar__munu__item"
+            className="navbar__munu__item"
           >
-            SignOut
+            MyPage
           </div>
-        )}
-
-        <div
-          onClick={() => {
-            if (isLogin) {
-              history.push('/mypage');
-            } else {
-              alert('login을 해주세요');
-            }
-          }}
-          class="navbar__munu__item"
-        >
-          MyPage
         </div>
-      </div>
-    </Navbar>
+      </Navbar>
+    </div>
   );
 };
 
@@ -105,4 +107,5 @@ export default Nav;
 
 /*
   로그아웃
+  모달할때 투명도로 나오게하면 좋을거같다 rgb로 조절
 */
