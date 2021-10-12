@@ -87,7 +87,6 @@ const App = () => {
           setPassword(password);
           setEmail(email);
           history.push('/');
-          // authorization();
         }
       })
       .catch((err) => {
@@ -163,6 +162,7 @@ const App = () => {
       .then((res) => {
         if (res.data.message === '현재 로그인 중이 아닙니다.') {
           setIsLogin(false);
+          setEmail('');
           alert('로그아웃되었습니다');
           localStorage.clear();
           history.push('/');

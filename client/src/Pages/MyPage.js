@@ -17,8 +17,7 @@ const Div = styled.div`
 const MyPage = ({
   username,
   email,
-  setUsername,
-  isLogin,
+
   setIsLogin,
   authorization,
 }) => {
@@ -157,6 +156,14 @@ const MyPage = ({
       >
         닉네임변경
       </Button>
+
+      <Button
+        onClick={postLogout}
+        fullWidth
+        style={{ background: 'rgb(25, 42, 86)', marginTop: '1rem' }}
+      >
+        로그아웃
+      </Button>
       <Button
         onClick={ondeleteUser}
         fullWidth
@@ -169,41 +176,3 @@ const MyPage = ({
 };
 
 export default MyPage;
-
-{
-}
-{
-  /* <MyPageTemplate>
-<Logo />
-<Div>
-  <div id="tables">
-    <div className="tables-email">
-      <div>
-        <div>
-          <div>email</div>
-        </div>
-        <div>{email}</div>
-      </div>
-    </div>
-  </div>
-  <div>
-    <div>
-      <div>username</div>
-      <div>{username}</div>
-      <input
-        value={changeName}
-        placeholder="닉네임변경"
-        type="text"
-        onChange={onUsernameChange}
-      ></input>
-      <button onClick={onClickuserChange}>변경</button>
-    </div>
-  </div>
-</Div>
-<Link to="/">
-  <button>Go home</button>
-</Link>
-<button onClick={postLogout}>logOut</button>
-<button onClick={ondeleteUser}>회원탈퇴</button>
-</MyPageTemplate> */
-}
