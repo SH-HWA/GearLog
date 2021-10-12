@@ -91,11 +91,22 @@ const AuthForm = ({
     }
   };
 
+  const kakaoHandler = () => {
+    const REDIRECT_URI = 'http://localhost:3000';
+    window.location.assign(
+      `https://kauth.kakao.com/oauth/authorize?client_id=196d7d1ae4d083329ceda11a092319d4&redirect_uri=${REDIRECT_URI}&response_type=code`,
+    );
+  };
+
   return (
     <AuthFormBlock>
       <Logo className="logo" style={{ fontsize: '200px' }} />
       <h3>{textMap['logo']}</h3>
-      <Button fullWidth style={{ background: '#fae100', marginTop: '1rem' }}>
+      <Button
+        onClick={kakaoHandler}
+        fullWidth
+        style={{ background: '#fae100', marginTop: '1rem' }}
+      >
         카카오
       </Button>
       <Button fullWidth style={{ background: '#2DB400', marginTop: '1rem' }}>
