@@ -24,7 +24,7 @@ module.exports = (req, res) => {
           Authorization: `Bearer ${token}`,
         },
       }).then((result) => {
-        console.log("HERE", result);
+        // console.log("HERE", result);
         res.status(200).json({ data: result.data.response });
       });
     })
