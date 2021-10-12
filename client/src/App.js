@@ -14,6 +14,7 @@ import axios from 'axios';
 import Models from './routers/Models';
 import Logitech from './routers/Gear/Logitech';
 import styled from 'styled-components';
+import Dropdown from './Components/common/Dropdown';
 
 //유저정보를 데이터베이스에 저장하고 인증할수있는 코드를짜야된다
 //로그인상태가 트루가된다면 메인페이지에서 마이페이지를 보여줘야한다
@@ -36,6 +37,7 @@ const App = () => {
   const [password, setPassword] = useState('');
   const [newPassword, setNewPassWord] = useState('');
   const [username, setUsername] = useState('');
+  const [dropdown, setDrop] = useState(false);
 
   useEffect(() => {
     const url = new URL(window.location.href);
@@ -260,9 +262,16 @@ const App = () => {
         GearLog
       </Div>
 
-      <Nav isLogin={isLogin} postLogout={postLogout} />
+      <Nav
+        setDrop={setDrop}
+        drop={dropdown}
+        isLogin={isLogin}
+        postLogout={postLogout}
+      />
+      {!dropdown ? <Models /> : null}
+
       <Route exact path="/">
-        <Home isLogin={isLogin} postLogout={postLogout} />
+        <Home claseeName="home" isLogin={isLogin} postLogout={postLogout} />
       </Route>
       <Route path="/jangbi">
         <Jangbi />
@@ -296,11 +305,9 @@ const App = () => {
           authorization={authorization}
         />
       </Route>
-      <Route path="/models">
-        <Models />
-      </Route>
+
       <Route path="/models/logi">
-        <Logitech />
+        <Logitech drop={dropdown} setDrop={setDrop} />
       </Route>
     </div>
   );

@@ -9,3 +9,15 @@
   margin-top: 5px;
   box-shadow: none;
 }
+
+#dropdown {
+  position: absolute;
+  position: fixed;
+  margin-top: 90px;
+  transition: 300ms;
+}
+.dropdown-1 {
+  display: flex;
+  padding-top: 70px;
+  background-color: rgba(0, 0, 0, 0.8);
+}

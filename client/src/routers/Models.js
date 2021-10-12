@@ -1,13 +1,14 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Button from '../Components/common/Button';
 import styled from 'styled-components';
-import { useHistory } from 'react-router-dom';
+import { useHistory, BrowserRouter, Route } from 'react-router-dom';
 import blue from '../img/Audio/blue.mp3';
 import red from '../img/Audio/redkey.mp3';
 import brown from '../img/Audio/brownkey.mp3';
 import Logi from '../img/Logi.png';
 import Corsair from '../img/Corsair.jpg';
 import Razer from '../img/razer.png';
+import './Model.css';
 
 const Dev = styled.div`
   background-color: rgb(248, 239, 186);
@@ -25,9 +26,11 @@ const Dev = styled.div`
     height: 30px;
     width: 200px;
   }
+  #dropdown {
+  }
 `;
 
-const Models = () => {
+const Models = ({ setDrop, drop }) => {
   const keys = [
     {
       id: 1,
@@ -56,57 +59,53 @@ const Models = () => {
 
   const history = useHistory();
   return (
-    <Dev>
-      <div
-        className="brand"
-        onClick={() => {
-          history.push('/models');
-        }}
-      >
-        <h1>브랜드 선택</h1>
+    <div>
+      <div id="dropdown">
+        <div className="dropdown-1">
+          <div
+            className="Logo"
+            onClick={() => {
+              history.push('/models/corsair');
+            }}
+          >
+            <img src={Corsair} alt="" />
+          </div>
+          <div
+            className="Logo"
+            onClick={() => {
+              history.push('/models/logi');
+            }}
+          >
+            <img src={Logi} alt="" />
+          </div>
+          <div
+            className="Logo"
+            onClick={() => {
+              history.push('/models/razer');
+            }}
+          >
+            <img src={Razer} alt="" />
+          </div>
+        </div>
       </div>
-
-      <div
-        className="Logo"
-        onClick={() => {
-          history.push('/models/logi');
-        }}
-      >
-        {keys.map((el, id) => {
-          return (
-            <div>
-              <Button
-                style={{ background: el.color }}
-                className="key"
-                key={id}
-                onClick={() => playAudio(el.src)}
-              >
-                {el.key}
-              </Button>
-            </div>
-          );
-        })}
-        <img src={Logi} alt="" />
-      </div>
-
-      <div
-        className="Logo"
-        onClick={() => {
-          history.push('/models/corsair');
-        }}
-      >
-        <img src={Corsair} alt="" />
-      </div>
-
-      <div
-        className="Logo"
-        onClick={() => {
-          history.push('/models/razer');
-        }}
-      >
-        <img src={Razer} alt="" />
-      </div>
-    </Dev>
+    </div>
   );
 };
 export default Models;
+// <Dev>
+
+// </Dev>
+//{keys.map((el, id) => {
+//       return (
+//         <div>
+//           <Button
+//             style={{ background: el.color }}
+//             className="key"
+//             key={id}
+//             onClick={() => playAudio(el.src)}
+//           >
+//             {el.key}
+//           </Button>
+//         </div>
+//       );
+//     })}
