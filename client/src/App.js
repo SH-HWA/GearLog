@@ -11,9 +11,8 @@ import MyPage from './Pages/MyPage';
 
 import { useHistory, Link } from 'react-router-dom';
 import axios from 'axios';
-
-import Models from './routers/Model/Models';
-import Logitech from './routers/Model/Gear/Logitech';
+import Models from './routers/Models';
+import Logitech from './routers/Gear/Logitech';
 import styled from 'styled-components';
 
 //유저정보를 데이터베이스에 저장하고 인증할수있는 코드를짜야된다
@@ -87,6 +86,7 @@ const App = () => {
           setPassword(password);
           setEmail(email);
           history.push('/');
+          // authorization();
         }
       })
       .catch((err) => {
