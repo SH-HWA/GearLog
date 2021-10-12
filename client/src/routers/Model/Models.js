@@ -6,6 +6,9 @@ import './Model.css';
 import blue from '../../img/Audio/blue.mp3';
 import red from '../../img/Audio/redkey.mp3';
 import brown from '../../img/Audio/brownkey.mp3';
+import Logi from '../../img/Logi.png';
+import Corsair from '../../img/Corsair.jpeg';
+import Razer from '../../img/razer.png';
 
 const Dev = styled.div`
   background-color: rgb(248, 239, 186);
@@ -24,11 +27,6 @@ const Dev = styled.div`
     width: 200px;
   }
 `;
-
-const playAudio = (data) => {
-  let audio = new Audio(data);
-  audio.play();
-};
 
 const Models = () => {
   const keys = [
@@ -52,18 +50,29 @@ const Models = () => {
     },
   ];
 
+  const playAudio = (data) => {
+    let audio = new Audio(data);
+    audio.play();
+  };
+
   const history = useHistory();
   return (
-    <>
-      <Dev>
-        <div
-          onClick={() => {
-            history.push('/models/logi');
-          }}
-          className="brand"
-        >
-          로지텍
-        </div>
+    <Dev>
+      <div
+        className="brand"
+        onClick={() => {
+          history.push('/models');
+        }}
+      >
+        <h1>브랜드 선택</h1>
+      </div>
+
+      <div
+        className="Logo"
+        onClick={() => {
+          history.push('/models/logi');
+        }}
+      >
         {keys.map((el, id) => {
           return (
             <div>
@@ -78,11 +87,27 @@ const Models = () => {
             </div>
           );
         })}
+        <img src={Logi} alt="" />
+      </div>
 
-        <div className="brand">커세어</div>
-        <div className="brand">레이저</div>
-      </Dev>
-    </>
+      <div
+        className="Logo"
+        onClick={() => {
+          history.push('/models/corsair');
+        }}
+      >
+        <img src={Corsair} alt="" />
+      </div>
+
+      <div
+        className="Logo"
+        onClick={() => {
+          history.push('/models/razer');
+        }}
+      >
+        <img src={Razer} alt="" />
+      </div>
+    </Dev>
   );
 };
 
