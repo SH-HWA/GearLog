@@ -49,12 +49,34 @@ const App = () => {
       if (social === 'naver') {
         getNaverToken(authorizationCode);
       }
+      if (social === 'google') {
+        getGoogleToken(authorizationCode);
+      }
     } else {
       if (email !== '카카오 소셜 로그인 회원입니다.') {
         authorization();
       }
     }
   }, [isLogin]);
+
+  const getGoogleToken = (code) => {
+    if (isLogin) {
+      return;
+    }
+    axios
+      .post('http://localhost:8000/google/callback', {
+        authorizationCode: code,
+      })
+      .then((res) => {
+        // console.log(res.data.data);
+        if (res.data.data) {
+          setUsername(`구글계정 id ${res.data.data.id}`);
+          setEmail(res.data.data.email);
+          setIsLogin(true);
+          history.push('/');
+        }
+      });
+  };
 
   const getNaverToken = (code) => {
     if (isLogin) {

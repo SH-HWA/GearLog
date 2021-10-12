@@ -23,6 +23,7 @@ app.delete("/signout", controllers.signout);
 app.post("/logout", controllers.logout);
 app.post("/kakao/callback", controllers.kakaoCB);
 app.post("/naver/callback", controllers.naverCB);
+app.post("/google/callback", controllers.googleCB);
 app.post("/userinfo/update", controllers.update);
 
 app.get("/", (req, res) => {
