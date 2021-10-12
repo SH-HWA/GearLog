@@ -1,11 +1,7 @@
 import React from 'react';
-import Sidebar from '../../Components/common/Sidebar';
-import Nav from '../../Components/Nav';
-import Home from '../Home';
-import umi from '../../img/1.png';
+
 import styled from 'styled-components';
 import { useHistory, Link } from 'react-router-dom';
-import Logitech from './Gear/Logitech';
 
 const Dev = styled.div`
   background-color: rgb(248, 239, 186);

@@ -1,12 +1,18 @@
+/* eslint-disable no-restricted-globals */
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import MyPageTemplate from './Auth/AuthTemplate';
+import AuthTemplate from './Auth/AuthTemplate';
 import Logo from '../Components/Logo';
-
+import './MyPage.css';
 import { useHistory, Link } from 'react-router-dom';
 import axios from 'axios';
+import Button from '../Components/common/Button';
 
-const Div = styled.div``;
+const Div = styled.div`
+  .tables {
+    border-right: solid;
+  }
+`;
 
 const MyPage = ({
   username,
@@ -17,6 +23,7 @@ const MyPage = ({
   authorization,
 }) => {
   const [changeName, setChangeName] = useState('');
+  const [istrue, setIsTrue] = useState(false);
   const history = useHistory();
 
   const onClickuserChange = () => {
@@ -25,25 +32,32 @@ const MyPage = ({
       return alert('소셜로그인의 경우 username을 변경할 수 없습니다.');
     }
 
-    axios
-      .post(
-        'http://localhost:8000/userinfo/update',
-        {
-          username: username,
-          newname: changeName,
-        },
-        {
-          withCredentials: true,
-        },
-      )
-      .then((res) => {
-        if (res.status === 200) {
-          let token = res.data.token;
-          localStorage.setItem('token', token);
-          authorization();
-          // setUsername(changeName);
-        }
-      });
+    let change = confirm('변경하시겠습니까?');
+
+    if (change) {
+      axios
+        .post(
+          'http://localhost:8000/userinfo/update',
+          {
+            username: username,
+            newname: changeName,
+          },
+          {
+            withCredentials: true,
+          },
+        )
+        .then((res) => {
+          if (res.status === 200) {
+            let token = res.data.token;
+            localStorage.setItem('token', token);
+            authorization();
+            // setUsername(changeName);
+          }
+        });
+    } else {
+      alert('변경 취소되었습니다');
+      setIsTrue(false);
+    }
   };
 
   const ondeleteUser = () => {
@@ -108,36 +122,100 @@ const MyPage = ({
   };
 
   return (
-    <MyPageTemplate>
-      <Logo />
-      <Div>
-        <div>
-          <div>
-            <div>email</div>
-            <div>{email}</div>
-          </div>
+    <AuthTemplate
+      onClick={() => {
+        setIsTrue(false);
+      }}
+    >
+      <h1>Gear log</h1>
+      <h1>{username} 님 환영합니다!</h1>
+      <div className="tables">
+        <div className="tables-user">
+          <div>eMail:</div>
         </div>
-        <div>
-          <div>
-            <div>username</div>
+        <div className="tables-user-info">
+          <div> {email}</div>
+        </div>
+      </div>
+      <div className="tables">
+        <div className="tables-user">
+          <div>username:</div>
+        </div>
+        {!istrue ? (
+          <div className="tables-user-info">
             <div>{username}</div>
-            <input
-              value={changeName}
-              placeholder="닉네임변경"
-              type="text"
-              onChange={onUsernameChange}
-            ></input>
-            <button onClick={onClickuserChange}>변경</button>
           </div>
-        </div>
-      </Div>
+        ) : (
+          <div className="tables-user-info">
+            <input value={changeName} onChange={onUsernameChange}></input>
+            <button onClick={onClickuserChange}>변경</button>
+            <button onClick={() => setIsTrue(false)}>취소</button>
+          </div>
+        )}
+      </div>
       <Link to="/">
-        <button>Go home</button>
+        <Button
+          fullWidth
+          style={{ background: 'rgb(25, 42, 86)', marginTop: '1rem' }}
+        >
+          홈으로
+        </Button>
       </Link>
-      <button onClick={postLogout}>logOut</button>
-      <button onClick={ondeleteUser}>회원탈퇴</button>
-    </MyPageTemplate>
+
+      <Button
+        onClick={() => setIsTrue((prev) => !prev)}
+        fullWidth
+        style={{ background: '#70a1ff', marginTop: '1rem' }}
+      >
+        닉네임변경
+      </Button>
+      <Button
+        onClick={ondeleteUser}
+        fullWidth
+        style={{ background: '#70a1ff', marginTop: '1rem' }}
+      >
+        회원탈퇴
+      </Button>
+    </AuthTemplate>
   );
 };
 
 export default MyPage;
+
+{
+}
+{
+  /* <MyPageTemplate>
+<Logo />
+<Div>
+  <div id="tables">
+    <div className="tables-email">
+      <div>
+        <div>
+          <div>email</div>
+        </div>
+        <div>{email}</div>
+      </div>
+    </div>
+  </div>
+  <div>
+    <div>
+      <div>username</div>
+      <div>{username}</div>
+      <input
+        value={changeName}
+        placeholder="닉네임변경"
+        type="text"
+        onChange={onUsernameChange}
+      ></input>
+      <button onClick={onClickuserChange}>변경</button>
+    </div>
+  </div>
+</Div>
+<Link to="/">
+  <button>Go home</button>
+</Link>
+<button onClick={postLogout}>logOut</button>
+<button onClick={ondeleteUser}>회원탈퇴</button>
+</MyPageTemplate> */
+}
