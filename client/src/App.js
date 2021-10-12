@@ -65,7 +65,7 @@ const App = () => {
         authorizationCode: code,
       })
       .then((res) => {
-        console.log(res.data.data);
+        // console.log(res.data.data);
         if (res.data.data) {
           setUsername(res.data.data.nickname);
           setEmail(res.data.data.email);
