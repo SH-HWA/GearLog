@@ -41,8 +41,14 @@ const App = () => {
   useEffect(() => {
     const url = new URL(window.location.href);
     const authorizationCode = url.searchParams.get('code');
+    let social = localStorage.getItem('social');
     if (authorizationCode) {
-      getKakaoToken(authorizationCode);
+      if (social === 'kakao') {
+        getKakaoToken(authorizationCode);
+      }
+      if (social === 'naver') {
+        getNaverToken(authorizationCode);
+      }
     } else {
       if (email !== '카카오 소셜 로그인 회원입니다.') {
         authorization();
@@ -50,11 +56,29 @@ const App = () => {
     }
   }, [isLogin]);
 
+  const getNaverToken = (code) => {
+    if (isLogin) {
+      return;
+    }
+    axios
+      .post('http://localhost:8000/naver/callback', {
+        authorizationCode: code,
+      })
+      .then((res) => {
+        console.log(res.data.data);
+        if (res.data.data) {
+          setUsername(res.data.data.nickname);
+          setEmail(res.data.data.email);
+          setIsLogin(true);
+          history.push('/');
+        }
+      });
+  };
+
   const getKakaoToken = (code) => {
     if (isLogin) {
       return;
     }
-
     axios
       .post('http://localhost:8000/kakao/callback', {
         authorizationCode: code,
@@ -63,8 +87,9 @@ const App = () => {
         // console.log(res.data.data.properties);
         if (res.data.data) {
           setUsername(res.data.data.properties.nickname);
-          setEmail('카카오 소셜 로그인 회원입니다.');
-          setPassword('');
+          setEmail(
+            '카카오 소셜 로그인 회원인 경우 현재 email을 불러올 수 없습니다.',
+          );
           setIsLogin(true);
           history.push('/');
         }

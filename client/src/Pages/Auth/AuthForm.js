@@ -92,9 +92,20 @@ const AuthForm = ({
   };
 
   const kakaoHandler = () => {
+    let currentSocial = 'kakao';
+    localStorage.setItem('social', currentSocial);
     const REDIRECT_URI = 'http://localhost:3000';
     window.location.assign(
       `https://kauth.kakao.com/oauth/authorize?client_id=196d7d1ae4d083329ceda11a092319d4&redirect_uri=${REDIRECT_URI}&response_type=code`,
+    );
+  };
+
+  const naverHandler = () => {
+    let currentSocial = 'naver';
+    localStorage.setItem('social', currentSocial);
+    const REDIRECT_URI = 'http://localhost:3000';
+    window.location.assign(
+      `https://nid.naver.com/oauth2.0/authorize?response_type=code&client_id=a584UXzcGutwMnwYQSuw&redirect_uri=${REDIRECT_URI}&state=RAMDOM_STATE`,
     );
   };
 
@@ -109,7 +120,11 @@ const AuthForm = ({
       >
         카카오
       </Button>
-      <Button fullWidth style={{ background: '#2DB400', marginTop: '1rem' }}>
+      <Button
+        onClick={naverHandler}
+        fullWidth
+        style={{ background: '#2DB400', marginTop: '1rem' }}
+      >
         네이버
       </Button>
       <Button fullWidth style={{ background: '#70a1ff', marginTop: '1rem' }}>
