@@ -1,0 +1,11 @@
+.key {
+  border-radius: 40%;
+  transition-duration: 0.3s;
+  box-shadow: 3px 3px 3px black;
+}
+
+.key:active {
+  margin-left: 5px;
+  margin-top: 5px;
+  box-shadow: none;
+}
