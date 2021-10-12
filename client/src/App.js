@@ -39,8 +39,33 @@ const App = () => {
   const [username, setUsername] = useState('');
 
   useEffect(() => {
-    authorization();
+    const url = new URL(window.location.href);
+    const authorizationCode = url.searchParams.get('code');
+    if (authorizationCode) {
+      getKakaoToken(authorizationCode);
+    } else {
+      authorization();
+    }
   }, []);
+
+  const getKakaoToken = (code) => {
+    axios
+      .post('http://localhost:8000/kakao/callback', {
+        authorizationCode: code,
+      })
+      .then((res) => {
+        // console.log(res.data.data.properties);
+        if (res.data) {
+          setIsLogin(true);
+          setUsername(res.data.data.properties.nickname);
+          setEmail('카카오 소셜 로그인 회원입니다.');
+          history.push('/');
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
 
   const postLogin = () => {
     return axios
