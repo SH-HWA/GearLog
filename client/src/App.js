@@ -41,24 +41,56 @@ const App = () => {
   useEffect(() => {
     const url = new URL(window.location.href);
     const authorizationCode = url.searchParams.get('code');
+    let social = localStorage.getItem('social');
     if (authorizationCode) {
-      getKakaoToken(authorizationCode);
+      if (social === 'kakao') {
+        getKakaoToken(authorizationCode);
+      }
+      if (social === 'naver') {
+        getNaverToken(authorizationCode);
+      }
     } else {
-      authorization();
+      if (email !== '카카오 소셜 로그인 회원입니다.') {
+        authorization();
+      }
     }
-  }, []);
+  }, [isLogin]);
+
+  const getNaverToken = (code) => {
+    if (isLogin) {
+      return;
+    }
+    axios
+      .post('http://localhost:8000/naver/callback', {
+        authorizationCode: code,
+      })
+      .then((res) => {
+        console.log(res.data.data);
+        if (res.data.data) {
+          setUsername(res.data.data.nickname);
+          setEmail(res.data.data.email);
+          setIsLogin(true);
+          history.push('/');
+        }
+      });
+  };
 
   const getKakaoToken = (code) => {
+    if (isLogin) {
+      return;
+    }
     axios
       .post('http://localhost:8000/kakao/callback', {
         authorizationCode: code,
       })
       .then((res) => {
         // console.log(res.data.data.properties);
-        if (res.data) {
-          setIsLogin(true);
+        if (res.data.data) {
           setUsername(res.data.data.properties.nickname);
-          setEmail('카카오 소셜 로그인 회원입니다.');
+          setEmail(
+            '카카오 소셜 로그인 회원인 경우 현재 email을 불러올 수 없습니다.',
+          );
+          setIsLogin(true);
           history.push('/');
         }
       })
@@ -82,10 +114,10 @@ const App = () => {
           //유저정보가 변한것이 마이페이지에 보여야된다
           let token = res.data.token;
           localStorage.setItem('token', token);
-          setIsLogin(true);
           setUsername(username);
           setPassword(password);
           setEmail(email);
+          setIsLogin(true);
           history.push('/');
           // authorization();
         }
@@ -107,9 +139,10 @@ const App = () => {
       .then((res) => {
         let totoken = res.config.headers.authorization.split(' ')[1];
         if (token === totoken) {
-          setIsLogin(true);
+          console.log(res.data.data.userinfo.username);
           setUsername(res.data.data.userinfo.username);
           setEmail(res.data.data.userinfo.email);
+          setIsLogin(true);
         }
       })
       .catch((err) => {

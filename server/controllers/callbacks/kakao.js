@@ -6,7 +6,6 @@ const axios = require("axios");
 const qs = require("qs");
 
 module.exports = (req, res) => {
-  // console.log(req.body.authorizationCode);
   axios({
     method: "POST",
     url: "https://kauth.kakao.com/oauth/token",
@@ -21,8 +20,6 @@ module.exports = (req, res) => {
       code: req.body.authorizationCode,
     }),
   }).then((response) => {
-    // console.log(response.data);
-    // res.status(200).json({ accessToken: response.data.access_token });
     const token = response.data.access_token;
     // console.log(token);
     axios({
@@ -37,7 +34,7 @@ module.exports = (req, res) => {
         res.status(200).json({ data: result.data });
       })
       .catch((err) => {
-        console.log(err);
+        res.status(404);
       });
   });
 };

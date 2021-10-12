@@ -27,6 +27,11 @@ const MyPage = ({
   const history = useHistory();
 
   const onClickuserChange = () => {
+    let social = localStorage.getItem('social');
+    if (social) {
+      return alert('소셜로그인의 경우 username을 변경할 수 없습니다.');
+    }
+
     let change = confirm('변경하시겠습니까?');
 
     if (change) {
@@ -56,6 +61,13 @@ const MyPage = ({
   };
 
   const ondeleteUser = () => {
+    let social = localStorage.getItem('social');
+    if (social) {
+      return alert(
+        '소셜로그인으로 로그인 한 경우 별도의 회원탈퇴가 필요하지 않습니다.',
+      );
+    }
+
     let confirm = window.confirm('회원탈퇴하실거에요?');
 
     if (confirm) {
