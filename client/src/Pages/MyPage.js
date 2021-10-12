@@ -2,7 +2,7 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import AuthTemplate from './Auth/AuthTemplate';
-import Logo from '../Components/Logo';
+
 import './MyPage.css';
 import { useHistory, Link } from 'react-router-dom';
 import axios from 'axios';
