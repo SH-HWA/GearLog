@@ -20,6 +20,10 @@ const MyPage = ({
   const history = useHistory();
 
   const onClickuserChange = () => {
+    if (email === '카카오 소셜 로그인 회원입니다.') {
+      return alert('소셜로그인 username은 변경할 수 없습니다.');
+    }
+
     axios
       .post(
         'http://localhost:8000/userinfo/update',
@@ -42,6 +46,12 @@ const MyPage = ({
   };
 
   const ondeleteUser = () => {
+    if (email === '카카오 소셜 로그인 회원입니다.') {
+      return alert(
+        '소셜로그인으로 로그인 한 경우 별도의 회원탈퇴가 필요하지 않습니다.',
+      );
+    }
+
     let confirm = window.confirm('회원탈퇴하실거에요?');
 
     if (confirm) {
