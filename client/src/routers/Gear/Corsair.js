@@ -28,19 +28,19 @@ const keys = [
   {
     id: 1,
     color: '#0984e3',
-    key: 'blu',
+    click: 'blu',
     src: blue,
   },
   {
     id: 2,
     color: '#ff5252',
-    key: 'red',
+    click: 'red',
     src: red,
   },
   {
     id: 3,
-    key: 'bwn',
     color: '#cc8e35',
+    click: 'bwn',
     src: brown,
   },
 ];
@@ -65,10 +65,10 @@ const Corsair = ({ setDrop }) => {
                 <Button
                   style={{ background: el.color }}
                   className="key"
-                  key={id}
+                  key={el.id}
                   onClick={() => playAudio(el.src)}
                 >
-                  {el.key}
+                  {el.click}
                 </Button>
               </div>
             );
@@ -79,9 +79,9 @@ const Corsair = ({ setDrop }) => {
             height="600"
             src="https://www.youtube.com/embed/7S1qCp4VXkI"
             title="YouTube video player"
-            frameborder="0"
+            frameBorder="0"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-            allowfullscreen
+            allowFullScreen
           ></iframe>
         </div>
       </ul>
