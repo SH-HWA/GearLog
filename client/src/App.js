@@ -6,7 +6,7 @@ import Jangbi from './Pages/Jangbi';
 import SignIn from './Pages/Auth/SignIn';
 import SignUp from './Pages/Auth/SignUp';
 import Nav from './Components/Nav';
-import Logo from './Components/Logo';
+
 import MyPage from './Pages/MyPage';
 
 import { useHistory, Link } from 'react-router-dom';
@@ -14,7 +14,8 @@ import axios from 'axios';
 import Models from './routers/Models';
 import Logitech from './routers/Gear/Logitech';
 import styled from 'styled-components';
-import Dropdown from './Components/common/Dropdown';
+import Razer from './routers/Gear/Razer';
+import Corsair from './routers/Gear/Corsair';
 
 //유저정보를 데이터베이스에 저장하고 인증할수있는 코드를짜야된다
 //로그인상태가 트루가된다면 메인페이지에서 마이페이지를 보여줘야한다
@@ -37,10 +38,9 @@ const App = () => {
   const [password, setPassword] = useState('');
   const [newPassword, setNewPassWord] = useState('');
   const [username, setUsername] = useState('');
-  const [dropdown, setDrop] = useState(false);
-
+  const [dropdown, setDrop] = useState(true);
+  const url = new URL(window.location.href); //전역으로
   useEffect(() => {
-    const url = new URL(window.location.href);
     const authorizationCode = url.searchParams.get('code');
     let social = localStorage.getItem('social');
     if (authorizationCode) {
@@ -59,6 +59,8 @@ const App = () => {
       }
     }
   }, [isLogin]);
+
+  const urls = url.origin.indexOf('mypage');
 
   const getGoogleToken = (code) => {
     if (isLogin) {
@@ -114,6 +116,7 @@ const App = () => {
             '카카오 소셜 로그인 회원인 경우 현재 email을 불러올 수 없습니다.',
           );
           setIsLogin(true);
+
           history.push('/');
         }
       })
@@ -142,7 +145,6 @@ const App = () => {
           setEmail(email);
           setIsLogin(true);
           history.push('/');
-          // authorization();
         }
       })
       .catch((err) => {
@@ -218,10 +220,11 @@ const App = () => {
       )
       .then((res) => {
         if (res.data.message === '현재 로그인 중이 아닙니다.') {
-          setIsLogin(false);
-          setEmail('');
-          alert('로그아웃되었습니다');
           localStorage.clear();
+          setIsLogin(false);
+
+          alert('로그아웃되었습니다');
+
           history.push('/');
         }
       })
@@ -253,13 +256,14 @@ const App = () => {
 
   return (
     <div>
-      <Div
-        style={{ position: 'fixed' }}
-        onClick={() => {
-          history.push('/');
-        }}
-      >
-        GearLog
+      <Div claseeName="main" style={{ position: 'fixed' }}>
+        <div
+          onClick={() => {
+            history.push('/');
+          }}
+        >
+          GearLog
+        </div>
       </Div>
 
       <Nav
@@ -267,12 +271,13 @@ const App = () => {
         drop={dropdown}
         isLogin={isLogin}
         postLogout={postLogout}
+        urls={urls}
       />
-      {!dropdown ? <Models /> : null}
-
+      {!dropdown ? <Models id="dropdwon" /> : null}
       <Route exact path="/">
-        <Home claseeName="home" isLogin={isLogin} postLogout={postLogout} />
+        <Home claseeName="impotant" isLogin={isLogin} postLogout={postLogout} />
       </Route>
+
       <Route path="/jangbi">
         <Jangbi />
       </Route>
@@ -308,6 +313,13 @@ const App = () => {
 
       <Route path="/models/logi">
         <Logitech drop={dropdown} setDrop={setDrop} />
+      </Route>
+
+      <Route path="/models/razer">
+        <Razer drop={dropdown} setDrop={setDrop} />
+      </Route>
+      <Route path="/models/corsair">
+        <Corsair drop={dropdown} setDrop={setDrop} />
       </Route>
     </div>
   );

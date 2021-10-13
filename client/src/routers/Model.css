@@ -11,13 +11,16 @@
 }
 
 #dropdown {
-  position: absolute;
+  background-color: rgba(0, 0, 0, 0.8);
+  width: 100%;
+  z-index: 2000;
   position: fixed;
   margin-top: 90px;
-  transition: 300ms;
 }
 .dropdown-1 {
   display: flex;
-  padding-top: 70px;
+}
+
+.logo {
   background-color: rgba(0, 0, 0, 0.8);
 }
