@@ -58,21 +58,23 @@ const Corsair = ({ setDrop }) => {
           <img src={K70TKL} alt="" />
         </div>
         <div>
-          <h1>제품명 : Corsair K70 TKL</h1>
-          {keys.map((el) => {
-            return (
-              <div key={el.id}>
-                <Button
-                  style={{ background: el.color }}
-                  className="key"
-                  key={el.id}
-                  onClick={() => playAudio(el.src)}
-                >
-                  {el.click}
-                </Button>
-              </div>
-            );
-          })}
+          <h1>
+            제품명 : Corsair K70 TKL
+            {keys.map((el) => {
+              return (
+                <div key={el.id}>
+                  <Button
+                    style={{ background: el.color }}
+                    className="key"
+                    key={el.id}
+                    onClick={() => playAudio(el.src)}
+                  >
+                    {el.click}
+                  </Button>
+                </div>
+              );
+            })}
+          </h1>
           <h2>제품 정보 및 영상보기!</h2>
           <iframe
             width="1000"
