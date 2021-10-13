@@ -232,7 +232,9 @@ const App = () => {
       .then((res) => {
         if (res.data.message === '현재 로그인 중이 아닙니다.') {
           localStorage.clear();
+          setUsername('');
           setEmail('');
+          setPassword('');
           setIsLogin(false);
 
           alert('로그아웃되었습니다');
@@ -316,6 +318,7 @@ const App = () => {
           onChage={onChange}
           email={email}
           password={password}
+          setPassword={setPassword}
           username={username}
           setUsername={setUsername}
           setIsLogin={setIsLogin}
