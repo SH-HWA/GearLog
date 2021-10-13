@@ -74,7 +74,7 @@ const Nav = ({ isLogin, postLogout, drop, setDrop, urls }) => {
               onClick={() => {
                 postLogout();
               }}
-              class="navbar__munu__item"
+              className="navbar__munu__item"
             >
               SignOut
             </div>
