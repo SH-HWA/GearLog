@@ -60,7 +60,7 @@ const Razer = ({ setDrop }) => {
         </div>
         <div>
           <h1>제품명 : Razer Black Widow V3 Mini</h1>
-          {keys.map((el, id) => {
+          {keys.map((el) => {
             return (
               <div>
                 <Button

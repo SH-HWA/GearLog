@@ -59,7 +59,7 @@ const Corsair = ({ setDrop }) => {
         </div>
         <div>
           <h1>제품명 : Corsair K70 TKL</h1>
-          {keys.map((el, id) => {
+          {keys.map((el) => {
             return (
               <div>
                 <Button

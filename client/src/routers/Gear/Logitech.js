@@ -62,7 +62,7 @@ const Logitech = ({ drop, setDrop }) => {
         <div>
           <h1>
             제품명 : Gpro X KDA
-            {keys.map((el, id) => {
+            {keys.map((el) => {
               return (
                 <div>
                   <Button
