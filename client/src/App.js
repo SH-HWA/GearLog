@@ -54,16 +54,31 @@ const App = () => {
         getGoogleToken(authorizationCode);
       }
     } else {
-      if (email !== '카카오 소셜 로그인 회원입니다.') {
+      if (!social) {
         authorization();
+      } else {
+        if (!username) {
+          getLocalInfo();
+          return;
+        }
+        localStorage.setItem('name', username);
+        localStorage.setItem('mail', email);
+        getLocalInfo();
       }
     }
   }, [isLogin]);
 
-  const getGoogleToken = (code) => {
-    if (isLogin) {
-      return;
+  const getLocalInfo = () => {
+    let name = localStorage.getItem('name');
+    let mail = localStorage.getItem('mail');
+    if (name) {
+      setUsername(name);
+      setEmail(mail);
+      setIsLogin(true);
     }
+  };
+
+  const getGoogleToken = (code) => {
     axios
       .post('http://localhost:8000/google/callback', {
         authorizationCode: code,
@@ -80,9 +95,6 @@ const App = () => {
   };
 
   const getNaverToken = (code) => {
-    if (isLogin) {
-      return;
-    }
     axios
       .post('http://localhost:8000/naver/callback', {
         authorizationCode: code,
@@ -99,9 +111,6 @@ const App = () => {
   };
 
   const getKakaoToken = (code) => {
-    if (isLogin) {
-      return;
-    }
     axios
       .post('http://localhost:8000/kakao/callback', {
         authorizationCode: code,
@@ -154,7 +163,6 @@ const App = () => {
 
   const authorization = () => {
     let token = localStorage.getItem('token');
-
     axios
       .get('http://localhost:8000/userinfo', {
         headers: { authorization: `Bearer ${token}` },
@@ -162,7 +170,7 @@ const App = () => {
       .then((res) => {
         let totoken = res.config.headers.authorization.split(' ')[1];
         if (token === totoken) {
-          console.log(res.data.data.userinfo.username);
+          // console.log(res.data.data.userinfo.username);
           setUsername(res.data.data.userinfo.username);
           setEmail(res.data.data.userinfo.email);
           setIsLogin(true);
@@ -218,10 +226,10 @@ const App = () => {
       )
       .then((res) => {
         if (res.data.message === '현재 로그인 중이 아닙니다.') {
+          localStorage.clear();
           setIsLogin(false);
           setEmail('');
           alert('로그아웃되었습니다');
-          localStorage.clear();
           history.push('/');
         }
       })
