@@ -14,13 +14,7 @@ const Div = styled.div`
   }
 `;
 
-const MyPage = ({
-  username,
-  email,
-
-  setIsLogin,
-  authorization,
-}) => {
+const MyPage = ({ username, email, setEmail, setIsLogin, authorization }) => {
   const [changeName, setChangeName] = useState('');
   const [istrue, setIsTrue] = useState(false);
   const history = useHistory();
@@ -106,9 +100,11 @@ const MyPage = ({
       )
       .then((res) => {
         if (res.data.message === '현재 로그인 중이 아닙니다.') {
+          localStorage.clear();
+          setEmail('');
           setIsLogin(false);
           alert('로그아웃되었습니다');
-          localStorage.clear();
+
           history.push('/');
         }
       })
