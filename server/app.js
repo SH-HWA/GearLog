@@ -8,7 +8,8 @@ const controllers = require("./controllers");
 
 app.use(
   cors({
-    origin: ["http://localhost:3000"],
+    // origin: ["http://localhost:3000"],
+    origin: true,
     credentials: true,
     methods: ["GET", "POST", "OPTIONS", "DELETE"],
   })
