@@ -23,8 +23,6 @@ const Dev = styled.div`
     height: 30px;
     width: 200px;
   }
-  #dropdown {
-  }
 `;
 
 const Models = ({ setDrop, drop }) => {
