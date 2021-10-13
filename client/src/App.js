@@ -61,6 +61,7 @@ const App = () => {
   }, [isLogin]);
 
   const urls = url.origin.indexOf('mypage');
+  const urlsBoard = url.origin.indexOf('view');
 
   const getGoogleToken = (code) => {
     if (isLogin) {
