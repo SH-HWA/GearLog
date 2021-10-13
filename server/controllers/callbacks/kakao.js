@@ -19,22 +19,26 @@ module.exports = (req, res) => {
       redirectUri: "http://localhost:3000",
       code: req.body.authorizationCode,
     }),
-  }).then((response) => {
-    const token = response.data.access_token;
-    // console.log(token);
-    axios({
-      method: "GET",
-      url: "https://kapi.kakao.com/v2/user/me",
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    })
-      .then((result) => {
-        // console.log("HERE", result);
-        res.status(200).json({ data: result.data });
+  })
+    .then((response) => {
+      const token = response.data.access_token;
+      // console.log(token);
+      axios({
+        method: "GET",
+        url: "https://kapi.kakao.com/v2/user/me",
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
       })
-      .catch((err) => {
-        res.status(404);
-      });
-  });
+        .then((result) => {
+          // console.log("HERE", result);
+          res.status(200).json({ data: result.data });
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    })
+    .catch((err) => {
+      res.status(404);
+    });
 };

@@ -83,9 +83,6 @@ const App = () => {
   const urlsBoard = url.origin.indexOf('view');
 
   const getGoogleToken = (code) => {
-    if (isLogin) {
-      return;
-    }
     axios
       .post('http://localhost:8000/google/callback', {
         authorizationCode: code,
@@ -102,9 +99,6 @@ const App = () => {
   };
 
   const getNaverToken = (code) => {
-    if (isLogin) {
-      return;
-    }
     axios
       .post('http://localhost:8000/naver/callback', {
         authorizationCode: code,
@@ -121,9 +115,6 @@ const App = () => {
   };
 
   const getKakaoToken = (code) => {
-    if (isLogin) {
-      return;
-    }
     axios
       .post('http://localhost:8000/kakao/callback', {
         authorizationCode: code,
@@ -177,7 +168,6 @@ const App = () => {
 
   const authorization = () => {
     let token = localStorage.getItem('token');
-
     axios
       .get('http://localhost:8000/userinfo', {
         headers: { authorization: `Bearer ${token}` },
@@ -185,7 +175,7 @@ const App = () => {
       .then((res) => {
         let totoken = res.config.headers.authorization.split(' ')[1];
         if (token === totoken) {
-          console.log(res.data.data.userinfo.username);
+          // console.log(res.data.data.userinfo.username);
           setUsername(res.data.data.userinfo.username);
           setEmail(res.data.data.userinfo.email);
           setIsLogin(true);
@@ -246,7 +236,6 @@ const App = () => {
           setIsLogin(false);
 
           alert('로그아웃되었습니다');
-
           history.push('/');
         }
       })

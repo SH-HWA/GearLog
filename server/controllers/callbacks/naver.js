@@ -23,10 +23,14 @@ module.exports = (req, res) => {
         headers: {
           Authorization: `Bearer ${token}`,
         },
-      }).then((result) => {
-        // console.log("HERE", result);
-        res.status(200).json({ data: result.data.response });
-      });
+      })
+        .then((result) => {
+          // console.log("HERE", result);
+          res.status(200).json({ data: result.data.response });
+        })
+        .catch((err) => {
+          console.log(err);
+        });
     })
     .catch((err) => {
       res.status(404);
