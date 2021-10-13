@@ -2,16 +2,13 @@ import React, { useState } from 'react';
 import Button from '../Components/common/Button';
 import styled from 'styled-components';
 import { useHistory, BrowserRouter, Route } from 'react-router-dom';
-import blue from '../img/Audio/blue.mp3';
-import red from '../img/Audio/redkey.mp3';
-import brown from '../img/Audio/brownkey.mp3';
-import Logi from '../img/Logi.png';
+
+import Logi from '../img/Logi.jpg';
 import Corsair from '../img/Corsair.jpg';
-import Razer from '../img/razer.png';
+import Razer from '../img/razer.jpg';
 import './Model.css';
 
 const Dev = styled.div`
-  background-color: rgb(248, 239, 186);
   justify-content: center;
   align-items: center;
   text-align: center;
@@ -31,32 +28,6 @@ const Dev = styled.div`
 `;
 
 const Models = ({ setDrop, drop }) => {
-  const keys = [
-    {
-      id: 1,
-      color: '#0984e3',
-      key: 'blu',
-      src: blue,
-    },
-    {
-      id: 2,
-      color: '#ff5252',
-      key: 'red',
-      src: red,
-    },
-    {
-      id: 3,
-      key: 'bwn',
-      color: '#cc8e35',
-      src: brown,
-    },
-  ];
-
-  const playAudio = (data) => {
-    let audio = new Audio(data);
-    audio.play();
-  };
-
   const history = useHistory();
   return (
     <div>
@@ -95,17 +66,3 @@ export default Models;
 // <Dev>
 
 // </Dev>
-//{keys.map((el, id) => {
-//       return (
-//         <div>
-//           <Button
-//             style={{ background: el.color }}
-//             className="key"
-//             key={id}
-//             onClick={() => playAudio(el.src)}
-//           >
-//             {el.key}
-//           </Button>
-//         </div>
-//       );
-//     })}
