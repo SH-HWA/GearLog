@@ -41,6 +41,7 @@ const App = () => {
   const [dropdown, setDrop] = useState(true);
   const url = new URL(window.location.href); //전역으로
   useEffect(() => {
+    const url = new URL(window.location.href);
     const authorizationCode = url.searchParams.get('code');
     let social = localStorage.getItem('social');
     if (authorizationCode) {
@@ -54,11 +55,29 @@ const App = () => {
         getGoogleToken(authorizationCode);
       }
     } else {
-      if (email !== '카카오 소셜 로그인 회원입니다.') {
+      if (!social) {
         authorization();
+      } else {
+        if (!username) {
+          getLocalInfo();
+          return;
+        }
+        localStorage.setItem('name', username);
+        localStorage.setItem('mail', email);
+        getLocalInfo();
       }
     }
   }, [isLogin]);
+
+  const getLocalInfo = () => {
+    let name = localStorage.getItem('name');
+    let mail = localStorage.getItem('mail');
+    if (name) {
+      setUsername(name);
+      setEmail(mail);
+      setIsLogin(true);
+    }
+  };
 
   const urls = url.origin.indexOf('mypage');
   const urlsBoard = url.origin.indexOf('view');
@@ -223,6 +242,7 @@ const App = () => {
       .then((res) => {
         if (res.data.message === '현재 로그인 중이 아닙니다.') {
           localStorage.clear();
+          setEmail('');
           setIsLogin(false);
 
           alert('로그아웃되었습니다');
@@ -303,6 +323,7 @@ const App = () => {
       </Route>
       <Route path="/mypage">
         <MyPage
+          setEmail={setEmail}
           onChage={onChange}
           email={email}
           password={password}
