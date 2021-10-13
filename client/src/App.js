@@ -144,6 +144,7 @@ const App = () => {
           setPassword(password);
           setEmail(email);
           setIsLogin(true);
+          setDrop(true);
           history.push('/');
         }
       })
