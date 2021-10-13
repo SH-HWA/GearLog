@@ -6,6 +6,7 @@ import blue from '../../img/Audio/blue.mp3';
 import red from '../../img/Audio/redkey.mp3';
 import brown from '../../img/Audio/brownkey.mp3';
 import Button from '../../Components/common/Button';
+import '../Model.css';
 
 const RazerStyle = styled.div`
   justify-content: center;

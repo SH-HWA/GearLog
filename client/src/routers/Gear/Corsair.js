@@ -5,7 +5,8 @@ import K70TKL from '../../img/K70TKL.jpg';
 import blue from '../../img/Audio/blue.mp3';
 import red from '../../img/Audio/redkey.mp3';
 import brown from '../../img/Audio/brownkey.mp3';
-
+import Button from '../../Components/common/Button';
+import '../Model.css';
 const CorsairStyle = styled.div`
   justify-content: center;
   align-items: center;
@@ -58,6 +59,20 @@ const Corsair = ({ setDrop }) => {
         </div>
         <div>
           <h1>제품명 : Corsair K70 TKL</h1>
+          {keys.map((el, id) => {
+            return (
+              <div>
+                <Button
+                  style={{ background: el.color }}
+                  className="key"
+                  key={id}
+                  onClick={() => playAudio(el.src)}
+                >
+                  {el.key}
+                </Button>
+              </div>
+            );
+          })}
           <h2>제품 정보 및 영상보기!</h2>
           <iframe
             width="1000"
