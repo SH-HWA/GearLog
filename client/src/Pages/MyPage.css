@@ -1,0 +1,14 @@
+.tables {
+  display: flex;
+  margin-bottom: 15px;
+  border-bottom: 1px solid;
+  font-size: larger;
+}
+
+.tables-user {
+  display: flex;
+
+  width: 50%;
+}
+
+
