@@ -7,7 +7,7 @@ const axios = require("axios");
 module.exports = (req, res) => {
   axios({
     method: "POST",
-    url: `https://nid.naver.com/oauth2.0/token?grant_type=authorization_code&client_id=${clientId}&client_secret=${clientSecret}&redirect_uri=http://localhost:3000&code=${req.body.authorizationCode}&state=RAMDOM_STATE`,
+    url: `https://nid.naver.com/oauth2.0/token?grant_type=authorization_code&client_id=${clientId}&client_secret=${clientSecret}&redirect_uri=http://gear-log.s3-website.ap-northeast-2.amazonaws.com&code=${req.body.authorizationCode}&state=RAMDOM_STATE`,
     headers: {
       "X-Naver-Client-Id": clientId,
       "X-Naver-Client-Secret": clientSecret,

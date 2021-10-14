@@ -16,7 +16,7 @@ module.exports = (req, res) => {
       grant_type: "authorization_code",
       client_id: clientId,
       // client_secret: clientSecret,
-      redirectUri: "http://localhost:3000",
+      redirectUri: "http://gear-log.s3-website.ap-northeast-2.amazonaws.com",
       code: req.body.authorizationCode,
     }),
   })
