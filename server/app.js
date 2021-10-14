@@ -31,7 +31,7 @@ app.get("/", (req, res) => {
   res.send("헬로월드다");
 });
 
-app.set("port", process.env.PORT || 8000);
+app.set("port", process.env.PORT || 80);
 app.listen(app.get("port"), () => {
   console.log(app.get("port"), "번 에서 스타트중");
 });
