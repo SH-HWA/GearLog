@@ -38,7 +38,7 @@ const MyPage = ({
     if (change) {
       axios
         .post(
-          'http://localhost:8000/userinfo/update',
+          'http://13.124.86.90/userinfo/update',
           {
             username: username,
             newname: changeName,
@@ -73,7 +73,7 @@ const MyPage = ({
 
     if (confirm) {
       axios
-        .delete('http://localhost:8000/signout', {
+        .delete('http://13.124.86.90/signout', {
           data: {
             username: username,
           },
@@ -100,7 +100,7 @@ const MyPage = ({
   const postLogout = () => {
     return axios
       .post(
-        'http://localhost:8000/logout',
+        'http://13.124.86.90/logout',
         {},
         {
           withCredentials: true,

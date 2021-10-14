@@ -84,7 +84,7 @@ const App = () => {
 
   const getGoogleToken = (code) => {
     axios
-      .post('http://localhost:8000/google/callback', {
+      .post('http://13.124.86.90/google/callback', {
         authorizationCode: code,
       })
       .then((res) => {
@@ -100,7 +100,7 @@ const App = () => {
 
   const getNaverToken = (code) => {
     axios
-      .post('http://localhost:8000/naver/callback', {
+      .post('http://13.124.86.90/naver/callback', {
         authorizationCode: code,
       })
       .then((res) => {
@@ -116,7 +116,7 @@ const App = () => {
 
   const getKakaoToken = (code) => {
     axios
-      .post('http://localhost:8000/kakao/callback', {
+      .post('http://13.124.86.90/kakao/callback', {
         authorizationCode: code,
       })
       .then((res) => {
@@ -139,7 +139,7 @@ const App = () => {
   const postLogin = () => {
     return axios
       .post(
-        'http://localhost:8000/login',
+        'http://13.124.86.90/login',
         { email: email, password: password },
         {
           headers: { 'Content-Type': 'application/json' },
@@ -169,7 +169,7 @@ const App = () => {
   const authorization = () => {
     let token = localStorage.getItem('token');
     axios
-      .get('http://localhost:8000/userinfo', {
+      .get('http://13.124.86.90/userinfo', {
         headers: { authorization: `Bearer ${token}` },
       })
       .then((res) => {
@@ -189,7 +189,7 @@ const App = () => {
   const postSignUp = () => {
     return axios
       .post(
-        'http://localhost:8000/signup',
+        'http://13.124.86.90/signup',
         {
           email: email,
           password: password,
@@ -223,7 +223,7 @@ const App = () => {
   const postLogout = () => {
     return axios
       .post(
-        'http://localhost:8000/logout',
+        'http://13.124.86.90/logout',
         {},
         {
           withCredentials: true,

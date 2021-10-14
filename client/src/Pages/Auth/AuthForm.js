@@ -94,7 +94,8 @@ const AuthForm = ({
   const kakaoHandler = () => {
     let currentSocial = 'kakao';
     localStorage.setItem('social', currentSocial);
-    const REDIRECT_URI = 'http://localhost:3000';
+    const REDIRECT_URI =
+      'http://gear-log.s3-website.ap-northeast-2.amazonaws.com/';
     window.location.assign(
       `https://kauth.kakao.com/oauth/authorize?client_id=196d7d1ae4d083329ceda11a092319d4&redirect_uri=${REDIRECT_URI}&response_type=code`,
     );
@@ -103,7 +104,8 @@ const AuthForm = ({
   const naverHandler = () => {
     let currentSocial = 'naver';
     localStorage.setItem('social', currentSocial);
-    const REDIRECT_URI = 'http://localhost:3000';
+    const REDIRECT_URI =
+      'http://gear-log.s3-website.ap-northeast-2.amazonaws.com/';
     window.location.assign(
       `https://nid.naver.com/oauth2.0/authorize?response_type=code&client_id=a584UXzcGutwMnwYQSuw&redirect_uri=${REDIRECT_URI}&state=RAMDOM_STATE`,
     );
@@ -112,7 +114,8 @@ const AuthForm = ({
   const googleHandler = () => {
     let currentSocial = 'google';
     localStorage.setItem('social', currentSocial);
-    const REDIRECT_URI = 'http://localhost:3000';
+    const REDIRECT_URI =
+      'http://gear-log.s3-website.ap-northeast-2.amazonaws.com/';
     window.location.assign(
       `https://accounts.google.com/o/oauth2/auth?client_id=538187650428-i2erq5l0c7hesj7srkqnldure0mg4o7p.apps.googleusercontent.com&redirect_uri=${REDIRECT_URI}&response_type=code&scope=https://www.googleapis.com/auth/userinfo.email&approval_prompt=force&access_type=offline`,
     );
